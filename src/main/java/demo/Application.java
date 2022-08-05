@@ -16,10 +16,7 @@ public class Application {
     	
     	new SpringApplication(Application.class).run(args);
 
-    	System.out.println("<<< Demo Microservices : Server DB H2 started >>>");
-    	
-    	
-        
+    	System.out.println("<<< Demo Microservices : Server DB H2 started>>>");
     }
     
 
