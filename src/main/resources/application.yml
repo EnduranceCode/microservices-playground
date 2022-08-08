@@ -1,10 +1,10 @@
 server: 
-  port: 8001
+  port: 0 
 front:
   url: http://localhost:4202        
 spring:
   application:
-    name: micro-api-ecommerce
+    name: micro-api-ecommerce1
   datasource:
     url: jdbc:h2:tcp://localhost:7001/mem:mydb
     username: sa
@@ -18,4 +18,11 @@ spring:
       ddl-auto: validate
     # none, validate, update, create-drop                          
   jackson:
-    date-format: dd/MM/yyyy HH:mm:ss 
+    date-format: dd/MM/yyyy HH:mm:ss
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true 

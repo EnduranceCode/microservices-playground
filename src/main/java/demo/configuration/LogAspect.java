@@ -20,7 +20,7 @@ public class LogAspect {
 	
 	
     @After("within(demo.controler..*)")
-    public void restLog(JoinPoint joinPoint) throws Throwable {
+    public void logControlers(JoinPoint joinPoint) throws Throwable {
     		
 		LocalTime currentTime = LocalTime.now();
 		System.out.println("########## " + webServerAppCtxt.getId() + ":" +  webServerAppCtxt.getWebServer().getPort() + " " + currentTime.toString()  + " - REQUEST RECEIVED: " + joinPoint.getSignature() + " ##########");	    
@@ -29,13 +29,13 @@ public class LogAspect {
     
 	/*
     @After("@annotation(demo.annotation.LogEnabled)")
-    public void restLog(JoinPoint joinPoint) throws Throwable {
+    public void logStart(JoinPoint joinPoint) throws Throwable {
     		
 		LocalTime currentTime = LocalTime.now();
-		System.out.println("########## " + webServerAppCtxt.getId() + ":" +  webServerAppCtxt.getWebServer().getPort() + " " + currentTime.toString()  + " - REQUEST RECEIVED: " + joinPoint.getSignature() + " ##########");	    
+		System.out.println("########## " + webServerAppCtxt.getId() + ":" +  webServerAppCtxt.getWebServer().getPort() + " " + currentTime.toString()  + " - STARTED: " + joinPoint.getSignature() + " ##########");	    
     }
     */
-	
+    
 
     /*
     @Around(value = "@annotation(demo.annotation.LogEnabled)")    

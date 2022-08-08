@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import demo.configuration.InitMessageBean;
 import demo.model.business.OrderBusiness;
 import demo.model.entities.OrderEntity;
-import demo.util.Util;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -28,7 +28,7 @@ public class OrderControler {
 	
 
 	@Autowired 
-	private Util util;
+	private InitMessageBean util;
 	
 
 	@Autowired 
