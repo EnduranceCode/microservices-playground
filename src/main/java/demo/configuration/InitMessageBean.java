@@ -1,4 +1,4 @@
-package demo.util;
+package demo.configuration;
 
 
 import java.time.LocalTime;
@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component 
-public class Util {
+public class InitMessageBean {
 
     
     @Autowired
