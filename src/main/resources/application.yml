@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8000
 front:
   url: http://localhost:4202        
 spring:
