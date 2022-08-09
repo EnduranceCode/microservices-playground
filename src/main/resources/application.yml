@@ -1,12 +1,13 @@
 server:
   port: 8001
+spring:
+  application:
+    name: micro-cloud-discover
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
 
-spring:
-  application:
-    name: Server Discover
+
 
     
