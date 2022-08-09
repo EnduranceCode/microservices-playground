@@ -1,23 +1,24 @@
 server:
-  port: 8002
+  port: 8765
 spring:
   application:
     name: micro-cloud-proxy
-eureka:
-  instance:
-    preferIpAddress: true
+eureka:  
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8001/eureka}
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true
+      
 zuul:
   routes:
     ecommerce:
       path: /ecommerce/**
-      url : http://192.168.199.1:61439/
+      service-id : micro-api-ecommerce
     back-office:      
-      url : http://192.168.199.1:61439/
+      url : http://192.168.1.78:53220/
       #service-id: 192.168.199.1:61439/   
 
 
