@@ -1,12 +1,16 @@
 server:
-  port: 8001
+  port: 8761
+spring:
+  application:
+    name: micro-cloud-discover
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+  server:
+    # false : quickly refresh dead instances of microservices
+    enableSelfPreservation: false
 
-spring:
-  application:
-    name: Server Discover
+
 
     
