@@ -25,11 +25,6 @@ import io.swagger.annotations.ApiOperation;
 //@Secured("ROLE_ADMIN")
 @RequestMapping("/api")  
 public class OrderControler {
-	
-
-	@Autowired 
-	private InitMessageBean util;
-	
 
 	@Autowired 
 	private OrderBusiness orderBusiness;

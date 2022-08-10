@@ -6,12 +6,13 @@ import java.util.Optional;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import demo.model.entities.OrderEntity;
 import demo.model.repository.OrderRepository;
 
 
-@Component
+@Service
 public class OrderBusiness {
 
 
@@ -69,20 +70,20 @@ public class OrderBusiness {
 			OrderEntity order = oldVersion.get();
 			
 
-			if (!ObjectUtils.isEmpty(patchOrder.getCliente())) {
+			if (!ObjectUtils.isEmpty(patchOrder.getCustomer())) {
 				
-				if (!ObjectUtils.isEmpty(patchOrder.getCliente().getId()))
-					order.getCliente().setId(patchOrder.getCliente().getId());
+				if (!ObjectUtils.isEmpty(patchOrder.getCustomer().getId()))
+					order.getCustomer().setId(patchOrder.getCustomer().getId());
 			}
 			
-			if (!ObjectUtils.isEmpty(patchOrder.getCodigo()))
-				order.setCodigo(patchOrder.getCodigo());
+			if (!ObjectUtils.isEmpty(patchOrder.getCode()))
+				order.setCode(patchOrder.getCode());
 						
-			if (!ObjectUtils.isEmpty(patchOrder.getData()))
-				order.setData(patchOrder.getData());
+			if (!ObjectUtils.isEmpty(patchOrder.getDate()))
+				order.setDate(patchOrder.getDate());
 			
-			if (!ObjectUtils.isEmpty(patchOrder.getValorTotal()))
-				order.setValorTotal(patchOrder.getValorTotal());
+			if (!ObjectUtils.isEmpty(patchOrder.getTotalValue()))
+				order.setTotalValue(patchOrder.getTotalValue());
 			
 			 return this.getRepo().save(order);			
 		}
