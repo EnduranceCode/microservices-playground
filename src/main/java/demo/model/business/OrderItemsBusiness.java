@@ -2,12 +2,13 @@ package demo.model.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import demo.model.repository.OrderItemRepository;
 
 
 
-@Component
+@Service
 public class OrderItemsBusiness {
 
 
@@ -23,14 +24,5 @@ public class OrderItemsBusiness {
 		}
 		
 		
-
-	
-
-     
-	
-	
-			
-	
-	
 
 }
