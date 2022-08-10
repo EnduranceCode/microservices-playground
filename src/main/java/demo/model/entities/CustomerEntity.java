@@ -6,24 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-
-@Entity (name = "TB_CLIENTE")  
-public class CustomerSupplier {  
+@Entity
+@Table (name = "TB_CUSTOMER")
+public class CustomerEntity {  
 		      
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)	   
       @Column(name="id", nullable=false)
       private Long id;
       
-      @Column(name="cpf", nullable=false, unique=false)
-      private String cpf;
+      @Column(name="fiscal_number", nullable=false, unique=false)
+      private String fiscalNumber;
 
-      @Column(name="nome", nullable=false)
-      private String nome;
-      
-      @Column(name="email", nullable=false)
+      @Column(name="name", nullable=false)
+      private String name;
+
       private String email;
 
 	public Long getId() {
@@ -34,20 +33,20 @@ public class CustomerSupplier {
 		this.id = id;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getFiscalNumber() {
+		return fiscalNumber;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setFiscalNumber(String fiscalNumber) {
+		this.fiscalNumber = fiscalNumber;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -57,6 +56,9 @@ public class CustomerSupplier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	
+      
       
 
       
