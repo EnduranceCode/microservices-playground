@@ -7,25 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-
-@Entity (name = "TB_FORNECEDOR")  
+@Entity
+@Table(name = "TB_SUPPLIER")  
 public class SupplierEntity {  
-		      
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-      @Column(name="id", nullable=false)
-      private Long id;
-      
-      @Column(name="cnpj", nullable=false, unique=false)
-      private String cnpj;
 
-      @Column(name="nome", nullable=false)
-      private String nome;
-      
-      @Column(name="email", nullable=false)
-      private String email;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", nullable=false)
+	private Long id;
+
+	@Column(name="fiscal_number", nullable=false, unique=false)
+	private String fiscalNumber;
+
+	@Column(name="name", nullable=false)
+	private String name;
+
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -35,31 +34,31 @@ public class SupplierEntity {
 		this.id = id;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public String getFiscalNumber() {
+		return fiscalNumber;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setFiscalNumber(String fiscalNumber) {
+		this.fiscalNumber = fiscalNumber;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String emaio) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-      
 
-      
-      
+
+
+
 }

@@ -4,88 +4,84 @@ package demo.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-
-@Entity (name = "TB_PRODUTO")  
+@Entity
+@Table(name = "TB_PRODUCT")  
 public class ProductEntity {  
-		      
-	  @Id
-	  @Column(name="codigo", nullable=false, unique=false)  
-      private String codigo;
-      
-      @Column(name="nome", nullable=false)
-      private String nome;
 
-      @Column(name="especificacao", nullable=false)
-      private String especificacao;
+	@Id
+	@Column(name="code", nullable=false, unique=false)  
+	private String code;
 
-      @Column(name="categoria", nullable=false)
-      private String categoria;
+	@Column(name="name", nullable=false)
+	private String name;
 
-      @Column(name="preco", nullable=false)
-      private Double preco;
-      
-      @ManyToOne
-      @JoinColumn(name = "id_fornecedor")      
-      private SupplierEntity fornecedor;
+	private String especification;
 
-	public String getCodigo() {
-		return codigo;
-	}
+	private String category;
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+	@Column(name="sale_price", nullable=false)
+	private Double salePrice;
 
-	public String getNome() {
-		return nome;
-	}
+	@ManyToOne
+	@JoinColumn(name = "supplier_id")      
+	private SupplierEntity supplier;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEspecificacao() {
-		return especificacao;
-	}
-
-	public void setEspecificacao(String especificacao) {
-		this.especificacao = especificacao;
-	}
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
-	public SupplierEntity getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(SupplierEntity fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-      
 	
-      
-      
+	public String getCode() {
+		return code;
+	}
 
-      
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEspecification() {
+		return especification;
+	}
+
+	public void setEspecification(String especification) {
+		this.especification = especification;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public Double getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(Double salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public SupplierEntity getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(SupplierEntity supplier) {
+		this.supplier = supplier;
+	}
+
+
+
+
+
 }

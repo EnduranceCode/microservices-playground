@@ -3,101 +3,71 @@ package demo.entities;
 
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
-
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-
-
-@Entity (name = "TB_PEDIDO")  
+@Entity  
+@Table(name = "TB_ORDER")
 public class OrderEntity {  
-		 
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  @Column(name="id", nullable=false)
-	  private Long id;
-	  	  
-	  
-	  @Column(name="codigo", nullable=false, unique=true)  
-      private String codigo;
-	  
-	  
-	  @Column(name="data", nullable=false)
-	 // @Temporal(TemporalType.DATE)
-	  @JsonFormat(pattern="dd/MM/yyyy")
-      private  LocalDate data;
-      
-	  @Column(name="valor_total", nullable=false)  
-      private Double valorTotal;
-                  
-      @ManyToOne
-      @JoinColumn(name = "id_cliente")      
-      private CustomerSupplier cliente;
-      
 
-      @Formula(
-    		  "(Select max(d.id) from TB_PEDIDO_PRODUTOS d WHERE d.pedido_id = id AND d.situacao <> 'ENTREGUE')"
-      )      
-      @JsonIgnore(true)
-      private Long idItemEmAndamento;
-      
-      
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", nullable=false)
+	private Long id;
 
-      @Transient    	      
-      private String logisticaSituacao;
 
-      @PostLoad
-      private void postLoad() {
-    	  
-    	  this.logisticaSituacao = this.idItemEmAndamento == null ? "FINALIZADA" : "INCOMPLETA";
-      }
+	@Column(name="code", nullable=false, unique=true)  
+	private String code;
 
-      /* OU SO O METODO SEM ATRIBUTO
-      @Transient
-      public String getLogisticaFinalizada() {
-		  
-    	  return this.idItemEmAndamento == null ? "Sim" : "Não";
-    	  
-      }  
-      */
-      public String getLogisticaSituacao() {
-    	  return this.logisticaSituacao;
-      }
-      
- 
-      //@OneToMany(mappedBy = "pedido", targetEntity = PedidoProdutosEntidade.class)
-      //private List<PedidoProdutosEntidade> itens;
-  	
 
-      
-      
-      
-	public String getCodigo() {
-		return codigo;
+	@Column(name="date", nullable=false)
+	// @Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private  LocalDate date;
+
+	@Column(name="total_value", nullable=false)  
+	private Double totalValue;
+
+	@ManyToOne
+	@JoinColumn(name = "customer_id")      
+	private CustomerEntity customer;
+
+
+	@Formula(
+			"(Select max(d.id) from TB_ORDER_ITENS d WHERE d.order_id = id AND d.status <> 'DELIVERED')"
+			)      
+	@JsonIgnore(true)
+	private Long hasItemNotDelivered;
+
+
+	@Transient    	      
+	private String status;
+
+	@PostLoad
+	private void postLoad() {
+
+		this.status = this.hasItemNotDelivered == null ? "CLOSED" : "PENDING";
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -107,50 +77,65 @@ public class OrderEntity {
 		this.id = id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public String getCode() {
+		return code;
 	}
 
-	public LocalDate getData() {
-		return data;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public LocalDate getDate() {
+		return date;
 	}
 
-	public Double getValorTotal() {
-		return valorTotal;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
-	public void setValorTotal(Double valorTotal) {
-		this.valorTotal = valorTotal;
+	public Double getTotalValue() {
+		return totalValue;
 	}
 
-	public CustomerSupplier getCliente() {
-		return cliente;
+	public void setTotalValue(Double totalValue) {
+		this.totalValue = totalValue;
 	}
 
-	public void setCliente(CustomerSupplier cliente) {
-		this.cliente = cliente;
+	public CustomerEntity getCustomer() {
+		return customer;
 	}
 
+	public void setCustomer(CustomerEntity customer) {
+		this.customer = customer;
+	}
 
 	public Long getIdItemEmAndamento() {
-		return idItemEmAndamento;
+		return hasItemNotDelivered;
 	}
-
 
 	public void setIdItemEmAndamento(Long idItemEmAndamento) {
-		this.idItemEmAndamento = idItemEmAndamento;
+		this.hasItemNotDelivered = idItemEmAndamento;
+	}
+
+	public void setLogisticaSituacao(String logisticaSituacao) {
+		this.status = logisticaSituacao;
 	}
 
 
 
 
+
 	
 	
-    /*
+	
+
+	//@OneToMany(mappedBy = "pedido", targetEntity = PedidoProdutosEntidade.class)
+	//private List<PedidoProdutosEntidade> itens;
+
+
+
+
+	/*
 	public List<PedidoProdutosEntidade> getItens() {
 		return itens;
 	}
@@ -158,8 +143,8 @@ public class OrderEntity {
 	public void setItens(List<PedidoProdutosEntidade> itens) {
 		this.itens = itens;
 	}
-	*/
-      
-	      
-      
+	 */
+
+
+
 }

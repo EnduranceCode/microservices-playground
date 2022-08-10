@@ -13,12 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-@Entity (name = "TB_PEDIDO_PRODUTOS")  
+@Entity
+@Table(name = "TB_ORDER_ITEMS")  
 public class OrderItemEntity {  
 		
 	  @Id
@@ -27,39 +28,36 @@ public class OrderItemEntity {
       private Long id;
 	  
 	  
-	  @Column(name="situacao", nullable=false)  
-      private String situacao;
+	  @Column(name="status", nullable=false)  
+      private String status;
 	  	  
 	  
-	  @Column(name="quantidade", nullable=false)  
-      private Integer quantidade;
+	  @Column(name="amount", nullable=false)  
+      private Integer amount;
+	  	  
+	  @Column(name="price", nullable=false)  
+      private Double price;
 	  
-	  
-	  @Column(name="preco", nullable=false)  
-      private Double preco;
-	  
-	  @Column(name="valor", nullable=false)  
-      private Double valor;
+	  @Column(name="value", nullable=false)  
+      private Double value;
 	  
 	  
       @ManyToOne
-      @JoinColumn(name = "produto_codigo")      
-      private ProductEntity produto;
+      @JoinColumn(name = "product_code")      
+      private ProductEntity product;
       
                   
       @ManyToOne
       //@JoinColumn(name = "pedido_codigo", referencedColumnName="codigo", nullable=false)
-      @JoinColumn(name = "pedido_id", nullable=false)
+      @JoinColumn(name = "order_id", nullable=false)
       @JsonIgnore(true)
-      private OrderEntity pedido;
+      private OrderEntity order;
 
 
 	public OrderItemEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-      
 
 
 	public Long getId() {
@@ -72,73 +70,67 @@ public class OrderItemEntity {
 	}
 
 
-	public String getSituacao() {
-		return situacao;
+	public String getStatus() {
+		return status;
 	}
 
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
-	public Integer getQuantidade() {
-		return quantidade;
+	public Integer getAmount() {
+		return amount;
 	}
 
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 
-	public Double getPreco() {
-		return preco;
+	public Double getPrice() {
+		return price;
 	}
 
 
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 
-	public Double getValor() {
-		return valor;
+	public Double getValue() {
+		return value;
 	}
 
 
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setValue(Double value) {
+		this.value = value;
 	}
 
 
-	public OrderEntity getPedido() {
-		return pedido;
+	public ProductEntity getProduct() {
+		return product;
 	}
 
 
-	public void setPedido(OrderEntity pedido) {
-		this.pedido = pedido;
+	public void setProduct(ProductEntity product) {
+		this.product = product;
+	}
+
+
+	public OrderEntity getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(OrderEntity order) {
+		this.order = order;
 	}
 
 
 
-
-	public ProductEntity getProduto() {
-		return produto;
-	}
-
-
-
-
-	public void setProduto(ProductEntity produto) {
-		this.produto = produto;
-	}
-
-      
-	
-      
- 	
       
       
       
