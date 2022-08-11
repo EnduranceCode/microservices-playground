@@ -13,13 +13,11 @@ spring:
     show-sql: true
     generate-ddl: true    
     hibernate:
-      ddl-auto: create-drop
-    # none, validate, update, create-drop
+      ddl-auto: create-drop   # OPTIONS: none, validate, update, create-drop
     defer-datasource-initialization: true
   sql:
     init.mode: always                        
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss
   h2:
-    console.enabled: true
-    # /h2-console
+    console.enabled: true  # Enables H2 browser page on: /h2-console
