@@ -15,10 +15,10 @@ eureka:
 zuul:
   routes:
     ecommerce:
-      #path: /ecommerce/**
+      #path: /ecommerce/**  # OPTIONAL element, instead uses root element. 
       service-id : micro-api-ecommerce
     backoffice:      
-      #url : http://192.168.1.78:53220/
+      #url : http://192.168.1.78:53220/  # OPTIONAL element,  instead uses root element.
       service-id: micro-api-backoffice   
 
 
