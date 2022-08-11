@@ -7,9 +7,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-  server:
-    # false : quickly refresh dead instances of microservices
-    enableSelfPreservation: false
+  server:    
+    enableSelfPreservation: false  # false -> fastly refresh dead instances of microservices. Thus, it will wait for frequent heartbeats from instances
 
 
 
