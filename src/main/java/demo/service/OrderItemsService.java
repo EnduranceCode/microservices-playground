@@ -1,21 +1,21 @@
-package demo.model.business;
+package demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import demo.model.repository.OrderItemRepository;
+import demo.repository.order_item.OrderItemRepository;
 
 
 
 @Service
-public class OrderItemsBusiness {
+public class OrderItemsService {
 
 
 	    @Autowired
 	    OrderItemRepository repo;
 
-		public OrderItemsBusiness() {
+		public OrderItemsService() {
 		
 		}
 

@@ -1,4 +1,4 @@
-package demo.model.business;
+package demo.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,35 +9,30 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import demo.model.entities.OrderEntity;
-import demo.model.repository.OrderRepository;
+import demo.repository.order.OrderRepository;
 
 
 @Service
-public class OrderBusiness {
+public class OrderService {
 
 
 	    @Autowired
-	    OrderRepository repo;
+	    private OrderRepository repository;
 
-		public OrderBusiness() {
+		public OrderService() {
 		
 		}
-
-		public OrderRepository getRepo() {
-			return repo;
-		}
-		
 		
 		
 		public List<OrderEntity> getOrders() {
 			
-			 return this.getRepo().findAll();			
+			 return this.repository.findAll();			
 		}
 		
 		
 		public Optional<OrderEntity> getOrder(Long orderId) {
 			
-			 return this.getRepo().findById(orderId);			
+			 return this.repository.findById(orderId);			
 		}
 		
 		
@@ -47,13 +42,13 @@ public class OrderBusiness {
 			// to be sure that it will cause a new resource
 			 //order.setCodigo(null);
 			
-			 return this.getRepo().save(order);			
+			 return this.repository.save(order);			
 		}
 		
 		
 		public OrderEntity update(OrderEntity order) {
 			
-			 return this.getRepo().save(order);			
+			 return this.repository.save(order);			
 		}
 		
 		
@@ -85,13 +80,13 @@ public class OrderBusiness {
 			if (!ObjectUtils.isEmpty(patchOrder.getTotalValue()))
 				order.setTotalValue(patchOrder.getTotalValue());
 			
-			 return this.getRepo().save(order);			
+			 return this.repository.save(order);			
 		}
 		
 		
 		public boolean delete(Long id) {
 						
-		    this.getRepo().deleteById(id);
+		    this.repository.deleteById(id);
 		    
 			return true;			
 		}

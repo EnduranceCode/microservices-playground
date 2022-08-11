@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity  
+@Entity(name = "Order")  
 @Table(name = "TB_ORDER")
 public class OrderEntity {  
 
