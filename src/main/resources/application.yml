@@ -1,6 +1,5 @@
-server: 
-  # if port = 0 eureka allows only one instance
-  port: 8083
+server:   
+  port: ${port:0}  # if port = 0 eureka allows only one instance of that service.  pattern: ${varProgramArgument:defaultvalue} -> varProgramArgument must be passed like --server.port=8086
 front:
   url: http://localhost:4202
 spring:
@@ -16,10 +15,11 @@ spring:
     show-sql: true
     generate-ddl: false    
     hibernate:
-      ddl-auto: validate
-    # none, validate, update, create-drop                          
+      ddl-auto: validate  # OPTIONS: none, validate, update, create-drop                              
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss
+  hateoas:
+    use-hal-as-default-json-media-type: false #Eliminate _embedded element from hateoas serializer
     
 eureka:
   client:
@@ -29,5 +29,5 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 5

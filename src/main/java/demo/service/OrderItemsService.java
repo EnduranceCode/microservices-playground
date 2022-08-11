@@ -1,9 +1,14 @@
 package demo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import demo.model.entities.OrderEntity;
+import demo.model.entities.OrderItemEntity;
 import demo.repository.order_item.OrderItemRepository;
 
 
@@ -13,16 +18,14 @@ public class OrderItemsService {
 
 
 	    @Autowired
-	    OrderItemRepository repo;
+	    private OrderItemRepository repository;
 
-		public OrderItemsService() {
 		
+		public List<OrderItemEntity> getOrders(Long orderId) {
+						
+			 return this.repository.findByOrderIdOrderByProductCode(orderId);			
 		}
 
-		public OrderItemRepository getRepo() {
-			return repo;
-		}
-		
 		
 
 }
