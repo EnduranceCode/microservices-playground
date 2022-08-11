@@ -23,7 +23,6 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<OrderEntity> aggregatedSalesByCustomer(Date startDate, Date endDate) {
-		// TODO Auto-generated method stub
 		
 		     return (List<OrderEntity>) entityManager.createQuery("")
 		          .setParameter("startDate", startDate)
