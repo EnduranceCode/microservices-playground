@@ -1,4 +1,4 @@
-package demo.model.repository;
+package demo.repository.order_item;
 
 import java.util.List;
 
