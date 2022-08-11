@@ -13,6 +13,10 @@ import demo.model.entities.OrderItemEntity;
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Long> {
 	
 	
+	public List<OrderItemEntity> findByOrderIdOrderByProductCode(Long orderId);
+	
 	public List<OrderItemEntity> findByOrderCodeOrderById(String orderCode);
+	
+
 	 
 }

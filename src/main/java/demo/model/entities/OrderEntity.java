@@ -1,7 +1,6 @@
 package demo.model.entities;
 
 
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -16,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
+import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,14 +23,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "Order")  
 @Table(name = "TB_ORDER")
-public class OrderEntity {  
-
+public class OrderEntity  {   
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", nullable=false)
 	private Long id;
 
-
+	
 	@Column(name="code", nullable=false, unique=true)  
 	private String code;
 
