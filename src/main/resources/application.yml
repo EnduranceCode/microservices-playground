@@ -29,5 +29,5 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 30
-    leaseExpirationDurationInSeconds: 5
+    leaseRenewalIntervalInSeconds: 30  # in combination of enableSelfPreservation defined in eureka server
+    leaseExpirationDurationInSeconds: 5 # in combination of enableSelfPreservation defined in eureka server
