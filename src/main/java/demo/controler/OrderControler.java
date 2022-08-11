@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.configuration.InitMessageBean;
-import demo.model.business.OrderBusiness;
 import demo.model.entities.OrderEntity;
+import demo.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 public class OrderControler {
 
 	@Autowired 
-	private OrderBusiness orderBusiness;
+	private OrderService orderService;
 
 
 	@ApiOperation("Retrieve all Orders")  	  
@@ -36,7 +36,7 @@ public class OrderControler {
 	public ResponseEntity<List<OrderEntity>> orders() {
 		
 					 
-		List<OrderEntity> resource = this.orderBusiness.getOrders();
+		List<OrderEntity> resource = this.orderService.getOrders();
 		
 		
 		if (resource ==  null)		
@@ -60,7 +60,7 @@ public class OrderControler {
 		if (order == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				
-		OrderEntity resource = this.orderBusiness.create(order);
+		OrderEntity resource = this.orderService.create(order);
 		
 		if (resource ==  null)		
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -81,7 +81,7 @@ public class OrderControler {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
 		
-		Optional<OrderEntity> resource =  this.orderBusiness.getOrder(id);
+		Optional<OrderEntity> resource =  this.orderService.getOrder(id);
 		
 		
 		if (resource ==  null)		
@@ -109,7 +109,7 @@ public class OrderControler {
 		
 		
 		order.setId(id);		
-		OrderEntity resource = this.orderBusiness.update(order);
+		OrderEntity resource = this.orderService.update(order);
 				
 		if (resource ==  null)		
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -137,7 +137,7 @@ public class OrderControler {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
 		order.setId(id);
-	 	OrderEntity resource = this.orderBusiness.process(id, order);
+	 	OrderEntity resource = this.orderService.process(id, order);
 		
 		
 		if (resource ==  null)		
@@ -158,7 +158,7 @@ public class OrderControler {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
 						
-		if (!this.orderBusiness.delete(id))
+		if (!this.orderService.delete(id))
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		// SUCCESS
