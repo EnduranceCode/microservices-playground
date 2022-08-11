@@ -69,6 +69,49 @@ public class OrderControler {
 	}
 	
 	
+	// NEGOTIATION FORMAT: curl -X GET "http://localhost:8086/api/orders" -H "accept: application/vnd.personal.summary+json" */
+	@ApiOperation("Retrieve all Orders")  	  
+	@RequestMapping(value="/orders", method = RequestMethod.GET, produces = "application/vnd.personal.summary+json")	
+	//@LogEnabled
+	public ResponseEntity<Resources<OrderRepresentional>> ordersSumary() {
+							 
+		List<OrderEntity> orders = this.orderService.getOrders();		
+		//orders.stream().forEach(o -> o.add(linkTo(methodOn(OrderControler.class).order(o.getId())).withSelfRel()));
+			
+		if (orders ==  null)		
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		
+		if (orders.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		
+		// RESPONSE BASED ON HATEOAS SPECIFICATION
+		
+		List<OrderRepresentional> list = new ArrayList<OrderRepresentional>();										
+		list.add(OrderRepresentional.build(orders.get(0), linkTo(methodOn(OrderControler.class).order(orders.get(0).getId())).withSelfRel(), linkTo(methodOn(OrderItemsControler.class).order(orders.get(0).getId())).withRel("getItems")));
+						
+		Link link = linkTo(methodOn(OrderControler.class).orders()).withSelfRel();
+		Resources<OrderRepresentional> representational = new Resources<OrderRepresentional>(list, link);
+
+		
+		// SUCCESS
+		return new ResponseEntity<>(representational,HttpStatus.OK);
+	}
+	
+	
+	
+	// TEXT OF NEGOTIATION FORMAT: curl -X GET "http://localhost:8086/api/orders" -H "accept: text/plain"	
+	@ApiOperation("Retrieve all Orders")  	  
+	@RequestMapping(value="/orders", method = RequestMethod.GET,  produces = "text/plain")	
+	//@LogEnabled
+	public ResponseEntity<String> ordersTxt() {
+						 
+		// SUCCESS
+		return new ResponseEntity<>("Hello World",HttpStatus.OK);
+	}
+	
+	
 	
 	/* WITHOUT HATEOAS
 	@ApiOperation("Retrieve all Orders")  	  
