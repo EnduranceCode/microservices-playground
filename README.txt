@@ -12,8 +12,7 @@ ECOMMERCE INSTANCES (CALL DIRECTLY)
 - http://192.168.1.78:XXX/swagger-ui.html
 
 
-
--- WITH HAVE RUN 2- 3- (OPTIONALS)
+-- IF YOU HAVE RUN 2- 3- (OPTIONALS)
 
 EUREKA 
 - http://localhost:8761/
