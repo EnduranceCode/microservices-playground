@@ -2,20 +2,24 @@ package demo.model.entities;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.context.annotation.Lazy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,10 +48,25 @@ public class OrderEntity  {
 	private Double totalValue;
 
 	@ManyToOne
-	@JoinColumn(name = "customer_id")      
+	@JoinColumn(name = "customer_id")
 	private CustomerEntity customer;
+	
+	
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	
+	
+	// OBS: TENTATIVAs DE COLUNA LAZY: NO H2 não teve efeito, mesmo com lazy a lista sempre é carregada (TODO: teste com mysql)
+	@OneToMany
+	/*
+	@OneToMany(fetch = FetchType.LAZY)	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@Lazy
+	*/	
+    @JoinColumn(name = "order_id", referencedColumnName="id", nullable=true)
+    //@JsonIgnore(true)
+	private List<OrderItemEntity> items;
 
-
+	
 	@Formula(
 			"(Select max(d.id) from TB_ORDER_ITEMS d WHERE d.order_id = id AND d.status <> 'DELIVERED')"
 			)      
@@ -119,6 +138,14 @@ public class OrderEntity  {
 
 	public void setLogisticaSituacao(String logisticaSituacao) {
 		this.status = logisticaSituacao;
+	}
+
+	public List<OrderItemEntity> getItems() {
+		return items;
+	}
+
+	public void setItems(List<OrderItemEntity> items) {
+		this.items = items;
 	}
 
 
