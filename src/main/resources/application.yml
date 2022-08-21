@@ -22,8 +22,9 @@ spring:
     use-hal-as-default-json-media-type: false #Eliminate _embedded element from hateoas serializer
     
 eureka:
-  client:
-    registerWithEureka: true
+  client:    
+    enabled: false  # false : in cases when we dont want to connect to a Eureka service
+    registerWithEureka: false  # false: in cases when we dont want to connect to a Eureka service
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

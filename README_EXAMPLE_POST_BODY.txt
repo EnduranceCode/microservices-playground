@@ -1,3 +1,5 @@
+payload for POST /orders/
+
 {
   "customer": {
     "id": 1
