@@ -1,28 +1,21 @@
 package demo.controler;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resources;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.model.entities.OrderEntity;
 import demo.model.entities.OrderItemEntity;
-import demo.model.representional.OrderRepresentional;
+import demo.model.entities.ProductEntity;
 import demo.service.OrderItemsService;
-import demo.service.OrderService;
+import demo.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -31,24 +24,22 @@ import io.swagger.annotations.ApiOperation;
 @Component
 //@Secured("ROLE_ADMIN")
 @RequestMapping("/api")  
-public class OrderItemsControler {
+public class ProductControler {
 
-	@Autowired 
-	private OrderItemsService orderItemsService;
+	@Autowired ProductService productService;
 	
 	
-	@ApiOperation("Retrieve Order Items")
-	@RequestMapping(value="/orders/{orderId}/items", method = RequestMethod.GET)	
-	public ResponseEntity<List<OrderItemEntity>> order(@PathVariable Long orderId) {
+	@ApiOperation("Retrieve Product")
+	@RequestMapping(value="/products/{code}", method = RequestMethod.GET)
+	public ResponseEntity<ProductEntity> product(@PathVariable String code) {
 		
-		if (orderId == null || orderId == 0)
+		if (code == null || code.equals(0))
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
 		
-		List<OrderItemEntity> resource =  null;
-		
+		ProductEntity resource = null;
 		try {
-			resource =  this.orderItemsService.getOrders(orderId);	
+			 resource =  this.productService.getProduct(code);	
 		}
 		catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,8 +48,7 @@ public class OrderItemsControler {
 		
 		if ((resource == null))
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-				
-		
+	
 		// SUCCESS
 		return new ResponseEntity<>(resource,HttpStatus.OK);
 	}

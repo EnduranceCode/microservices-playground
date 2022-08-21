@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import demo.model.ISalesAnalitics;
+import demo.model.SalesAnalitics;
 import demo.model.entities.OrderEntity;
 import demo.repository.order.OrderRepository;
 
@@ -23,6 +24,8 @@ public class OrderService {
 		
 		}
 		
+		
+		/* CRUD OPERATIONS */
 		
 		public List<OrderEntity> getOrders() {
 			
@@ -52,7 +55,7 @@ public class OrderService {
 		}
 		
 		
-		public OrderEntity process(Long id, OrderEntity patchOrder) {
+		public OrderEntity processUpdate(Long id, OrderEntity patchOrder) {
 			
 			
 			Optional<OrderEntity> oldVersion = this.getOrder(id);
@@ -90,6 +93,34 @@ public class OrderService {
 		    
 			return true;			
 		}
+		
+		
+		/* FIM CRUD OPERATIONS */
+		
+		
+		
+		
+		
+		/* ADVANCED OPERATIONS */
+		
+		
+		public List<ISalesAnalitics> getSalesByProduct() {
+			
+			 return this.repository.aggregatedSalesByProduct();			
+		}
+		
+		public List<SalesAnalitics> getSalesByCustomer() {
+			
+			 return this.repository.aggregatedSalesByCustomer(null, null);			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 	
 
 }
