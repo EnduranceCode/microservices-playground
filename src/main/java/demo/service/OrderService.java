@@ -105,7 +105,7 @@ public class OrderService {
 		
 		
 		public List<ISalesAnalitics> getSalesByProduct() {
-			
+		
 			 return this.repository.aggregatedSalesByProduct();			
 		}
 		
