@@ -30,7 +30,13 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 	@Override
 	public List<SalesAnalitics> aggregatedSalesByCustomer(Date startDate, Date endDate) {
 		
+		
+		/* POR DEFAULT O RETORNO É SEMPRE UMA LISTA DE OBJETOS List<Object[]>, 
+		 * 
+		 * AS POSSIVEIS SOLUÇÕES PARA RETORNAR List<SalesAnalitics> SÃO */
 
+		
+		/* NOTA: OPÇÃO 1: */
 		/*
 		List<Object[]> arrayResultSet = entityManager.createQuery("Select customer.name as aggregate, SUM(totalValue) as amount from Order group by customer.name").getResultList();
 		
@@ -40,17 +46,17 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 			list.add(new SalesAnalitics((String)item[0],(double)item[1]));
 		}
 		return list;
+		
 		*/
+		
 				
-				
+		/* NOTA: OPÇÃO 2: */ 
+		// USAR O CONTRUTOR new demo.model.SalesAnalitics(...)				
 		return (List<SalesAnalitics>) entityManager.createQuery("SELECT new demo.model.SalesAnalitics(customer.name, SUM(totalValue)) from Order group by customer.name").getResultList();
-		
-		// query nativa
-		//return (List<SalesAnalitics>) entityManager.createNativeQuery("Select 'OK' as aggregate, SUM(total_value) as amount from tb_order group by 1").getResultList();
-		
-			
-		     //     .setParameter("startDate", startDate)
-		          //.setParameter("endDate", endDate);
+ 	    
+		// .setParameter("startDate", startDate)
+        //.setParameter("endDate", endDate);
+					
 		         
 		    
 	}
