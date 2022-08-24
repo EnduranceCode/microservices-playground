@@ -8,22 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table (name = "TB_CUSTOMER")
 public class CustomerEntity {  
-		      
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)	   
-      @Column(name="id", nullable=false)
-      private Long id;
-      
-      @Column(name="fiscal_number", nullable=false, unique=false)
-      private String fiscalNumber;
 
-      @Column(name="name", nullable=false)
-      private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	   
+	@Column(name="id", nullable=false)
+	private Long id;
 
-      private String email;
+	@Column(name="fiscal_number", nullable=false, unique=false)
+	@JsonProperty("fiscal_number")
+	private String fiscalNumber;
+
+	@Column(name="name", nullable=false)
+	private String name;
+
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -57,10 +60,10 @@ public class CustomerEntity {
 		this.email = email;
 	}
 
-	
-      
-      
 
-      
-      
+
+
+
+
+
 }
