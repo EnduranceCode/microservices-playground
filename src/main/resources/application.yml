@@ -17,8 +17,8 @@ zuul:
     ecommerce:
       #path: /ecommerce/**  # OPTIONAL element, instead uses root element. 
       service-id : micro-api-ecommerce
-    backoffice:      
+    finance:      
       #url : http://192.168.1.78:53220/  # OPTIONAL element,  instead uses root element.
-      service-id: micro-api-backoffice   
+      service-id: micro-api-finance   
 
 
