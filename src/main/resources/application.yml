@@ -37,7 +37,7 @@ eureka:
 app:
   services:
     payment:
-      uri: http://localhost:8080/api/orders-example/
+      uri: http://localhost:8050/order-payment/
       
     
     

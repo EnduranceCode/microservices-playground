@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import demo.model.entities.OrderEntity;
+import demo.entities.OrderEntity;
+import demo.model.PaymentOrderDTO;
 import demo.repository.order.OrderRepository;
 
 
@@ -65,27 +66,34 @@ public class OrderService {
 		order = this.repository.save(order);
 			
 		
-		// call payment service (SYNCHRONOUSLY)
-		RestTemplate restTemplate = new RestTemplate();		
-		HttpEntity<OrderEntity> request = new HttpEntity<>(order);
+
+		// call FINANCE service (SYNCHRONOUSLY)
 		
-		//ResponseEntity<OrderEntity> objReturned = restTemplate.postForEntity(servicePaymentURI, request, OrderEntity.class);		
-		ResponseEntity<OrderEntity> objReturned = restTemplate.getForEntity(servicePaymentURI + "5", OrderEntity.class);
+		PaymentOrderDTO requestFinance = new PaymentOrderDTO();
+		requestFinance.setOrderId(order.getId());
+		requestFinance.setFiscalNumber(order.getCustomer().getFiscalNumber());
+		requestFinance.setValue(order.getTotalValue());
+						
+		RestTemplate restTemplate = new RestTemplate();	
+		ResponseEntity<PaymentOrderDTO> responseFinance = restTemplate.postForEntity(servicePaymentURI, requestFinance, PaymentOrderDTO.class);		
 		
 		
-		// call logistic service (SYNCHRONOUSLY)		
+		if (responseFinance.getBody().getAproved()) {
+			// SEND EMAIL AND SMS TO CUSTOMERS
+			System.out.println("Email Payment: Dear " + order.getCustomer().getName() + " Paymment for your order " + order.getCode() + " was processed.");	
+		}
+		
+
+		
+		// call LOGISTIC SERVICE service (SYNCHRONOUSLY)		
 		/* TO DO 
-		 * CALL LOGISTIC SERVICE
-		 * */
+		 * 
+		 * */		
+		System.out.println("Email Delivery: Dear " + order.getCustomer().getName() + " Your order " + order.getCode() + " was will be delivery before 2022/XX/XX ");
 		
 		
-		// SEND EMAIL AND SMS TO CUSTOMERS
-		System.out.println("Email: Dear " + order.getCustomer().getName() + " Paymment for your order " + order.getCode() + " was processed.");
-		System.out.println("Email: Dear " + order.getCustomer().getName() + " Your order " + order.getCode() + " was will be delivery before 2022/XX/XX ");
 		
-		
-		return order;
-		
+		return order;		
 	}
 
 		
