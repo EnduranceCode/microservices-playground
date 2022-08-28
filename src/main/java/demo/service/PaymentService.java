@@ -1,5 +1,8 @@
 package demo.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,19 +65,25 @@ public class PaymentService {
 		// create Payment
 		PaymentEntity paymentEntity = new PaymentEntity();		
 		paymentEntity.setOrderId(paymentOrderDTO.getOrderId());
-		paymentEntity.setFiscalNumber(paymentOrderDTO.getFiscalNumber());		
+		paymentEntity.setFiscalNumber(paymentOrderDTO.getFiscalNumber());	
+		paymentEntity.setValue(paymentOrderDTO.getValue());
+		paymentEntity.setAutorizationDateTime(LocalDateTime.now());
 		paymentEntity = this.repository.save(paymentEntity);
 						
 		
 		/********  CALL EXTERNAL CREDIT CARD OPERATOR ******/
 				
 		// SIMULATES A BAD PERFORMANCE PROCESS DURATION
+		
+		System.out.println("WAITING FOR EXTERNAL SERVICE PAYMENT ....");	
 	    try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    System.out.println("PAYMENT AUTHORIZATION RESPONSE");
+	    
 		/*********/
 	    	
 	   

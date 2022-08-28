@@ -2,6 +2,7 @@ package demo.entities;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class PaymentEntity  {
 
 	@Column(name="autorization_dt", nullable=false)
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
-	private  LocalDate autorizationDateTime;
+	private  LocalDateTime autorizationDateTime;
 
 
 	public Long getId() {
@@ -76,11 +77,11 @@ public class PaymentEntity  {
 		this.value = value;
 	}
 
-	public LocalDate getAutorizationDateTime() {
+	public LocalDateTime getAutorizationDateTime() {
 		return autorizationDateTime;
 	}
 
-	public void setAutorizationDateTime(LocalDate autorizationDateTime) {
+	public void setAutorizationDateTime(LocalDateTime autorizationDateTime) {
 		this.autorizationDateTime = autorizationDateTime;
 	}
 

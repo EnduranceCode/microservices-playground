@@ -18,8 +18,7 @@ import demo.model.PaymentOrderDTO;
 import demo.service.PaymentService;
 
 
-@RestController  
-@RequestMapping("/")  
+@RestController   
 public class RestControler {
 
 	
@@ -29,7 +28,7 @@ public class RestControler {
 
 	@RequestMapping(value="/", method = RequestMethod.GET)	
 	@ResponseStatus(HttpStatus.OK)
-	public String getTest(@PathVariable Long id) {
+	public String getTest() {
 		
 		return "Test Finance Service";
 	}
