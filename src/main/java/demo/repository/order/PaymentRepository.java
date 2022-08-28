@@ -3,10 +3,10 @@ package demo.repository.order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import demo.model.entities.OrderEntity;
+import demo.entities.PaymentEntity;
 
 @Repository
-public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+public interface PaymentRepository extends JpaRepository<PaymentEntity, Long> {
 
 	
 	

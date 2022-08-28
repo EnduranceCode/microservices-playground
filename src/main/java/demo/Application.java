@@ -16,7 +16,7 @@ public class Application {
     	
     	new SpringApplication(Application.class).run(args);
     	    	
-    	System.out.println("<<< Demo Microservices: WebAPI eCommerce started >>>");
+    	System.out.println("<<< Demo Microservices: Payment Service started >>>");
     }
        
 	

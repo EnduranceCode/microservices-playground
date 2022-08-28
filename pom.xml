@@ -6,8 +6,8 @@
 
     <!-- My Aplication information  -->
 	<groupId>demo</groupId>
-	<artifactId>micro-api-ecommerce</artifactId>
-	<name>micro-api-ecommerce</name>
+	<artifactId>micro-api-finance</artifactId>
+	<name>micro-api-finance</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
@@ -79,7 +79,7 @@
     
     <build>
 
-		<finalName>micro-api-ecommerce</finalName>
+		<finalName>micro-api-finance</finalName>
 		<plugins>
 
 			<plugin>

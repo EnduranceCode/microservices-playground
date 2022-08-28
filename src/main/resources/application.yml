@@ -1,28 +1,28 @@
 server:   
-  port: ${port:0}
+  port: 8050
   
 spring:
   application:
-    name: micro-api-ecommerce
+    name: micro-api-finance
   datasource:
-    url: jdbc:h2:tcp://localhost:7001/mem:mydb
+    url: jdbc:h2:mem:mydb
     username: sa
     password: 
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: validate  # OPTIONS: none, validate, update, create-drop                              
+      ddl-auto: create-drop  # OPTIONS: none, validate, update, create-drop                              
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss
         
         
 eureka:
   client:    
-    enabled: true  # false : in cases when we dont want to connect to a Eureka service
-    registerWithEureka: true  # false: in cases when we dont want to connect to a Eureka service
+    enabled: false  # false : in cases when we dont want to connect to a Eureka service
+    registerWithEureka: false  # false: in cases when we dont want to connect to a Eureka service
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
@@ -32,14 +32,6 @@ eureka:
     leaseExpirationDurationInSeconds: 5 # in combination of enableSelfPreservation defined in eureka server
 
 
-
-# specific application custom properties  
-app:
-  services:
-    payment:
-      uri: http://localhost:8080/api/orders-example/
-      
-    
     
 
     
