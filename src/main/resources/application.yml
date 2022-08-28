@@ -17,7 +17,8 @@ spring:
       ddl-auto: create-drop  # OPTIONS: none, validate, update, create-drop                              
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss
-        
+  h2:
+    console.enabled: true  # Enables H2 browser page on: /h2-console       
         
 eureka:
   client:    
