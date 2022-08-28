@@ -33,6 +33,14 @@ eureka:
 
 
 
+# specific application custom properties  
+app:
+  services:
+    payment:
+      uri: http://localhost:8080/api/orders-example/
+      
+    
+    
 
     
 

@@ -45,12 +45,14 @@ public class RestControler {
 		return resource;
 	}
 
-
+	
 	@RequestMapping( value="/orders", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void setOrder(@RequestBody OrderEntity order) {
 	
-		this.orderService.create(order);	
+		
+		//this.orderService.create(order);		
+		this.orderService.processOrder(order);
 				
 	}
 
@@ -73,6 +75,33 @@ public class RestControler {
 	}
 	
 	/* BASIC REST CRUD OPERATIONS */ 
+	
+
+	
+	
+	
+	
+	
+	/* OTHER EXAMPLES */
+	
+	@RequestMapping(value="/orders-example/{id}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public OrderEntity getOrdersExample(@PathVariable Long id) {
+		
+		OrderEntity order = this.orderService.getOrder(id);
+				
+	    try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return order;
+	}
+	
+	
+	/* OTHER EXAMPLES */
 	
 
 
