@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,8 +39,12 @@ public class OrderEntity  {
 	@Column(name="total_value", nullable=false)
 	@JsonProperty("total_value")
 	private Double totalValue;
+	
+	@Column(name="status", nullable=true)  
+	private String status;
+	
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id")
 	private CustomerEntity customer;
 
@@ -85,8 +90,13 @@ public class OrderEntity  {
 		this.customer = customer;
 	}
 
+	public String getStatus() {
+		return status;
+	}
 
-
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 
 
