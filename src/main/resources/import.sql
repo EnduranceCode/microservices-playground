@@ -16,11 +16,11 @@ INSERT INTO TB_PRODUCT (code, name, category, sale_price) VALUES ('0100201', 'Vi
 INSERT INTO TB_PRODUCT (code, name, category, sale_price) VALUES ('0100202', 'Piano 32 key', 'MUSIC', 10185);
 
 
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (1, 1, 'DELIVERED', '0100201', 2, 3220, 6440);
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (2, 1, 'DELIVERED', '0100200', 2, 4500, 9000);
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (3, 1, 'DELIVERED', '0100202', 3, 15024, 30048);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (1, 1, 'CLOSED', '0100201', 2, 3220, 6440);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (2, 1, 'CLOSED', '0100200', 2, 4500, 9000);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (3, 1, 'CLOSED', '0100202', 3, 15024, 30048);
 
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (4, 2, 'DELIVERED', '0100201', 1, 3220, 3200);
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (5, 2, 'DELIVERED', '0100200', 2, 4500, 9000);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (4, 2, 'CLOSED', '0100201', 1, 3220, 3200);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (5, 2, 'CLOSED', '0100200', 2, 4500, 9000);
 
-INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (6, 3, 'DELIVERED', '0100202', 5, 4500, 22500);
+INSERT INTO TB_ORDER_ITEMS (id, order_id, status, product_code, amount, price, value) VALUES (6, 3, 'CLOSED', '0100202', 5, 4500, 22500);
