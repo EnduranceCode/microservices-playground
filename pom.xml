@@ -7,7 +7,7 @@
     <!-- My Aplication information  -->
 	<groupId>demo</groupId>
 	<artifactId>micro-api-ecommerce</artifactId>
-	<name>micro-api-ecommerceok</name>
+	<name>micro-api-ecommerce</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
