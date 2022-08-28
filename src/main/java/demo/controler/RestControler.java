@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.model.entities.OrderEntity;
+import demo.entities.OrderEntity;
 import demo.service.OrderService;
 
 
@@ -80,28 +80,6 @@ public class RestControler {
 	
 	
 	
-	
-	
-	/* OTHER EXAMPLES */
-	
-	@RequestMapping(value="/orders-example/{id}", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public OrderEntity getOrdersExample(@PathVariable Long id) {
-		
-		OrderEntity order = this.orderService.getOrder(id);
-				
-	    try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return order;
-	}
-	
-	
-	/* OTHER EXAMPLES */
 	
 
 
