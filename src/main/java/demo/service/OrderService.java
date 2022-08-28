@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import demo.entities.OrderEntity;
@@ -59,15 +60,20 @@ public class OrderService {
 
 	
 	
-	
+	//@Transactional
 	public OrderEntity processOrder(OrderEntity order) {
 			
-		// create order
-		order = this.repository.save(order);
-			
 		
-
-		// call FINANCE service (SYNCHRONOUSLY)
+		/******  create orde *****/
+		order.setStatus("SUBMITTED");
+		order = this.repository.saveAndFlush(order);		
+		
+		//OrderEntity order = this.repository.findById(orderPost.getId()).get();
+				
+		
+		
+		
+		/***** call FINANCE service (SYNCHRONOUSLY) *****/
 		
 		PaymentOrderDTO requestFinance = new PaymentOrderDTO();
 		requestFinance.setOrderId(order.getId());
@@ -79,17 +85,34 @@ public class OrderService {
 		
 		
 		if (responseFinance.getBody().getAproved()) {
-			// SEND EMAIL AND SMS TO CUSTOMERS
+			
+			// update order status
+			order.setStatus("PAYMENT_APPROVED");
+			this.update(order);
+			
+			// SEND EMAIL AND SMS TO CUSTOMERS			
 			System.out.println("Email Payment: Dear " + order.getCustomer().getName() + " Paymment for your order " + order.getCode() + " was processed.");	
 		}
 		
 
 		
-		// call LOGISTIC SERVICE service (SYNCHRONOUSLY)		
+		/****** call LOGISTIC SERVICE service (SYNCHRONOUSLY)  *****/
 		/* TO DO 
 		 * 
 		 * */		
-		System.out.println("Email Delivery: Dear " + order.getCustomer().getName() + " Your order " + order.getCode() + " was will be delivery before 2022/XX/XX ");
+		boolean callLogisticOk = true;
+		
+		
+		if (callLogisticOk) {
+			
+			// update order status
+			order.setStatus("DELIVERY_SCHEDULED");
+			this.update(order);
+			
+			// SEND EMAIL AND SMS TO CUSTOMERS	
+			System.out.println("Email Delivery: Dear " + order.getCustomer().getName() + " Your order " + order.getCode() + " was will be delivery before 2022/XX/XX ");
+			
+		}
 		
 		
 		
