@@ -45,96 +45,20 @@
 		</dependency>
 		
 		
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    	</dependency>
-    	
-    	    	  	
-    	<dependency>
-		    <groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
-
-	</dependencies>
 		
+		<!-- libraries necessárias para o Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		
+		
+	</dependencies>
 	
-	<dependencyManagement>
-        <dependencies>
-        	
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            
-        </dependencies>
-        
-    </dependencyManagement>
-    
-    
-    
-    <build>
-
-		<finalName>micro-api-ecommerce</finalName>
-		<plugins>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>3.0.0-M3</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			
-			
-			<plugin>
-    			<groupId>org.springframework.boot</groupId>
-    			<artifactId>spring-boot-maven-plugin</artifactId>
-    			<executions>
-        			<execution>
-            			<configuration>
-                			<mainClass>demo.Application</mainClass>
-            			</configuration>
-        			</execution>
-    			</executions>
-			</plugin>
-			
-
-
-		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.1.1</version>
-				</plugin>
-			</plugins>
-
-		</pluginManagement>
-
-	</build>
-	
-
-
 </project>

@@ -1,38 +1,26 @@
 server:   
-  port: ${port:0}
+  port: 8080
   
 spring:
   application:
     name: micro-api-ecommerce
   datasource:
-    url: jdbc:h2:tcp://localhost:7001/mem:mydb
+    url: jdbc:h2:mem:mydb
     username: sa
     password: 
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: validate  # OPTIONS: none, validate, update, create-drop                              
+      ddl-auto: create-drop  # OPTIONS: none, validate, update, create-drop                              
   jackson:
-    date-format: dd/MM/yyyy HH:mm:ss
-        
-        
-eureka:
-  client:    
-    enabled: true  # false : in cases when we dont want to connect to a Eureka service
-    registerWithEureka: true  # false: in cases when we dont want to connect to a Eureka service
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 30  # in combination of enableSelfPreservation defined in eureka server
-    leaseExpirationDurationInSeconds: 5 # in combination of enableSelfPreservation defined in eureka server
-
-
-
+    date-format: dd/MM/yyyy HH:mm:ss  
+  h2:
+    console.enabled: true  # Enables H2 browser page on: /h2-console 
+  
+  
 # specific application custom properties  
 app:
   services:
