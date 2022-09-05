@@ -51,8 +51,10 @@ public class RestControler {
 	public void setOrder(@RequestBody OrderEntity order) {
 	
 		
-		//this.orderService.create(order);		
-		this.orderService.processOrder(order);
+		this.orderService.create(order);		
+		
+		// try it in order to call finance microservice
+		//this.orderService.processOrder(order);
 				
 	}
 
