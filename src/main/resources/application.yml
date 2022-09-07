@@ -3,7 +3,7 @@ server:
   
 spring:
   application:
-    name: micro-api-ecommerce
+    name: micro-api-ecommerce-cloud
   datasource:
     url: jdbc:h2:tcp://localhost:7001/mem:mydb
     username: sa
