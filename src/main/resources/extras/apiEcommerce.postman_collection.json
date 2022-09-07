@@ -27,6 +27,27 @@
 			"response": []
 		},
 		{
+			"name": "GET ALL orders PROXY",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/orders/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET ONE order",
 			"request": {
 				"method": "GET",

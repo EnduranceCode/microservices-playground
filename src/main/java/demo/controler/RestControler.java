@@ -49,13 +49,11 @@ public class RestControler {
 	@RequestMapping( value="/orders", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void setOrder(@RequestBody OrderEntity order) {
-	
-		
+			
 		this.orderService.create(order);		
 		
 		// try it in order to call finance microservice
-		//this.orderService.processOrder(order);
-				
+		this.orderService.processOrder(order);				
 	}
 
 
@@ -80,10 +78,6 @@ public class RestControler {
 	
 
 	
-	
-	
-	
-
 
 }
 

@@ -57,8 +57,44 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+				
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 		
 		
 	</dependencies>
+	
+	
+	    <dependencyManagement>
+        <dependencies>
+        	
+        	<!--
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+          -->
+            
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!--  <version>2021.0.3</version>--> <!--  PARA USO COM A VERSÃO 2.7.2 DO SPRING BOOT--> 
+                <version>Greenwich.SR1</version>                                
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            
+
+            
+        </dependencies>
+        
+    </dependencyManagement>
 	
 </project>
