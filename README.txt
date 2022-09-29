@@ -11,7 +11,7 @@ INSTRUTIONS:
 4- PROXY: Execute micro-cloud-proxy (OPTIONAL)
    - http://localhost:8765/actuator/health
 
-5- Execute micro-api-ecommerce-cloud. (change port on YML file before launch each instance you want to run, or use --server.port=8086 program arguments)
+5- Execute micro-api-ecommerce-cloud. (change port on YML file before launch each instance you want to run, or use --server.port=8087 program arguments)
 
    ECOMMERCE INSTANCES (CALL DIRECTLY)
    - http://localhost:8086/swagger-ui.html to see Swagger with RestControler in action
@@ -21,7 +21,9 @@ INSTRUTIONS:
    - http://localhost:8765/ecommerce/swagger-ui.html
    - http://localhost:8765/ecommerce/api/orders
 
-6- import src/main/resource/extras/apiEcommerce.postman_collection.json in postman tool (https://www.postman.com/), in order to test easily POST, PUT and DELETE REST operations
+6- Execute micro-api-finance (change port on YML file before launch each instance you want to run, or use --server.port=8051 program arguments)
+
+7- import src/main/resource/extras/apiEcommerce.postman_collection.json in postman tool (https://www.postman.com/), in order to test easily POST, PUT and DELETE REST operations
 
 
 
