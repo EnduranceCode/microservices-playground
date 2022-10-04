@@ -1,3 +1,16 @@
+-- Create the database on the MySQL Server
+CREATE DATABASE netflix CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create the user's database on the MySQL Server
+CREATE USER 'netflix-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'netflix-secret';
+
+-- Grant privileges to the new user in the created database
+GRANT ALL PRIVILEGES ON netflix.* TO 'netflix-user'@'localhost';
+
+-- Use the newly created database
+USE netflix;
+
+-- Create the CATEGORIES table
 CREATE TABLE IF NOT EXISTS `CATEGORIES`
 (
   `ID`          BIGINT(20)  NOT NULL AUTO_INCREMENT,
@@ -6,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `CATEGORIES`
   UNIQUE INDEX `unique` (`NAME` ASC)
 );
 
+-- Create the TV_SHOWS table
 CREATE TABLE IF NOT EXISTS `TV_SHOWS`
 (
   `ID`          	BIGINT(20)    NOT NULL AUTO_INCREMENT,
@@ -21,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `TV_SHOWS`
     FOREIGN KEY (CATEGORY_ID) REFERENCES `CATEGORIES` (ID)
 );
 
+-- Create the SEASONS table
 CREATE TABLE IF NOT EXISTS `SEASONS`
 (
   `ID`          BIGINT(20)   NOT NULL AUTO_INCREMENT,
@@ -32,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `SEASONS`
     FOREIGN KEY (TV_SHOW_ID) REFERENCES `TV_SHOWS` (ID)
 );
 
+-- Create the CHAPTERS table
 CREATE TABLE IF NOT EXISTS `CHAPTERS`
 (
   `ID`          BIGINT(20)   NOT NULL AUTO_INCREMENT,
