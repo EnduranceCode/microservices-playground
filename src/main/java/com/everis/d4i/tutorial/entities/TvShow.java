@@ -3,7 +3,6 @@ package com.everis.d4i.tutorial.entities;
 import java.io.Serializable;
 import java.time.Year;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +11,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TV_SHOWS")
+@NamedQuery(name = "TvShow.findByCategoryId",
+		query = "SELECT ts FROM TvShow ts JOIN ts.categories c WHERE c.id = :categoryId")
 public class TvShow implements Serializable {
 
 	private static final long serialVersionUID = 4916713904971425156L;
@@ -41,9 +44,11 @@ public class TvShow implements Serializable {
 	@Column(name = "RECOMMENDED_AGE")
 	private byte recommendedAge;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CATEGORY_ID", nullable = false)
-	private Category category;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "CATEGORIES_TV_SHOWS", joinColumns = {
+			@JoinColumn(name = "TV_SHOW_ID")}, inverseJoinColumns = {
+			@JoinColumn(name = "CATEGORY_ID")})
+	private List<Category> categories;
 
 	@Column(name = "ADVERTISING", nullable = true)
 	private String advertising;
@@ -99,12 +104,12 @@ public class TvShow implements Serializable {
 		this.recommendedAge = recommendedAge;
 	}
 
-	public Category getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public String getAdvertising() {
@@ -122,5 +127,4 @@ public class TvShow implements Serializable {
 	public void setSeasons(List<Season> seasons) {
 		this.seasons = seasons;
 	}
-
 }

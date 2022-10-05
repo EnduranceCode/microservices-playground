@@ -1,4 +1,10 @@
-INSERT INTO CATEGORIES(ID, NAME) VALUES 
+-- -------------------------------------------------------------------------------------------------
+-- This script is necessary to populate the database with the initial data.
+--
+-- This script must be executed immediately after the script create.sql.
+--
+
+INSERT INTO CATEGORIES(ID, NAME) VALUES
 	(1, 'TERROR'), 
 	(2, 'COMEDIA'), 
 	(3, 'ACCIÓN');

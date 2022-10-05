@@ -1,3 +1,9 @@
+-- -------------------------------------------------------------------------------------------------
+-- This script is necessary to create the database and the initial database tables.
+--
+-- This must be the first script to be executed
+--
+
 -- Create the database on the MySQL Server
 CREATE DATABASE netflix CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
