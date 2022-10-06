@@ -1,5 +1,4 @@
-package demo.entities;
-
+package demo.entities.ecommerce;
 
 
 import javax.persistence.Column;
@@ -10,21 +9,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_SUPPLIER")  
-public class SupplierEntity {  
+@Table (name = "TB_ECOM_CUSTOMER")
+public class CustomerEntity {  
+		      
+	  @Id
+	  @GeneratedValue(strategy = GenerationType.IDENTITY)	   
+      @Column(name="id", nullable=false)
+      private Long id;
+      
+      @Column(name="fiscal_number", nullable=false, unique=false)
+      private String fiscalNumber;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable=false)
-	private Long id;
+      @Column(name="name", nullable=false)
+      private String name;
 
-	@Column(name="fiscal_number", nullable=false, unique=false)
-	private String fiscalNumber;
-
-	@Column(name="name", nullable=false)
-	private String name;
-
-	private String email;
+      private String email;
 
 	public Long getId() {
 		return id;
@@ -58,7 +57,10 @@ public class SupplierEntity {
 		this.email = email;
 	}
 
+	
+      
+      
 
-
-
+      
+      
 }

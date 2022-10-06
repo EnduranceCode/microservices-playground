@@ -1,4 +1,4 @@
-package demo.entities;
+package demo.entities.ecommerce;
 
 
 
@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_PRODUCT")  
+@Table(name = "TB_ECOM_PRODUCT")  
 public class ProductEntity {  
 
 	@Id

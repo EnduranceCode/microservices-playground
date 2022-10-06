@@ -1,4 +1,4 @@
-package demo.entities;
+package demo.entities.ecommerce;
 
 
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity(name = "Order")  
-@Table(name = "TB_ORDER")
+@Table(name = "TB_ECOM_ORDER")
 public class OrderEntity  {   
 	
 	@Id
@@ -60,11 +60,11 @@ public class OrderEntity  {
 	@OneToMany(fetch = FetchType.LAZY)	
 	@ElementCollection(fetch = FetchType.LAZY)
 	@Lazy
-	*/	
+		
     @JoinColumn(name = "order_id", referencedColumnName="id", nullable=true)
     //@JsonIgnore(true)
 	private List<OrderItemEntity> items;
-
+	 */
 	
 	/*
 	@Formula(
@@ -138,6 +138,7 @@ public class OrderEntity  {
 		this.status = logisticaSituacao;
 	}
 
+	/*
 	public List<OrderItemEntity> getItems() {
 		return items;
 	}
@@ -145,6 +146,7 @@ public class OrderEntity  {
 	public void setItems(List<OrderItemEntity> items) {
 		this.items = items;
 	}
+	*/
 
 
 
