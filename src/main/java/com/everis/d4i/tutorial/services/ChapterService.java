@@ -1,9 +1,8 @@
 package com.everis.d4i.tutorial.services;
 
-import java.util.List;
-
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ChapterRest;
+import java.util.List;
 
 public interface ChapterService {
 
@@ -12,4 +11,6 @@ public interface ChapterService {
 	ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
 			short chapterNumber) throws NetflixException;
 
+	ChapterRest patchChapterName(Long tvShowId, short seasonNumber, Long chapterId,
+			ChapterRest chapterRest) throws NetflixException;
 }
