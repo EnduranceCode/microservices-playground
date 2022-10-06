@@ -68,6 +68,7 @@ public class OrderService {
 		order.setStatus("SUBMITTED");
 		order = this.repository.saveAndFlush(order);		
 		
+		System.out.println("Email Submited: Dear " + order.getCustomer().getName() + " Your order " + order.getCode() + " was receveid on 2022/XX/XX ");
 		//OrderEntity order = this.repository.findById(orderPost.getId()).get();
 				
 		

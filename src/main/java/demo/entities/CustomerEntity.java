@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table (name = "TB_CUSTOMER")
+@Table (name = "TB_ECOM_CUSTOMER")
 public class CustomerEntity {  
 
 	@Id

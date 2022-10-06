@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "TB_ORDER")
+@Table(name = "TB_ECOM_ORDER")
 public class OrderEntity  {   
 
 	@Id
