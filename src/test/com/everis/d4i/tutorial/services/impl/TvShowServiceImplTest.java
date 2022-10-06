@@ -1,6 +1,7 @@
 package com.everis.d4i.tutorial.services.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -27,13 +29,12 @@ public class TvShowServiceImplTest {
     @Mock
     TvShowRepository tvShowRepository;
 
-    static Long CATEGORY_ID;
+    static final Long CATEGORY_ID = 1L;
+    static final Long TV_SHOW_ID = 1L;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        CATEGORY_ID = 1L;
     }
 
     @Test
@@ -55,5 +56,32 @@ public class TvShowServiceImplTest {
 
         verify(tvShowRepository, times(1)).findByCategoryId(anyLong());
         assertEquals(CATEGORY_ID, tvShows.get(0).getCategories().get(0).getId());
+    }
+
+    @Test
+    public void patchTvShowName() throws NetflixException {
+        final String OLD_NAME = "Old tv show name";
+        final String NEW_NAME = "New tv show name";
+
+        TvShowRest mockGivenTvShow = new TvShowRest();
+        mockGivenTvShow.setName(NEW_NAME);
+
+        TvShow mockExistingTvShow = new TvShow();
+        mockExistingTvShow.setName(OLD_NAME);
+
+        TvShow mockPatchedTvShow = new TvShow();
+        mockPatchedTvShow.setName(NEW_NAME);
+
+        ArgumentCaptor<TvShow> tvShowCaptor = ArgumentCaptor.forClass(TvShow.class);
+
+        when(tvShowRepository.getOne(anyLong())).thenReturn(mockExistingTvShow);
+        when(tvShowRepository.save(tvShowCaptor.capture())).thenReturn(mockPatchedTvShow);
+
+        TvShowRest tvShowRest = tvShowService.patchTvShowName(TV_SHOW_ID, mockGivenTvShow);
+
+        verify(tvShowRepository, times(1)).getOne(anyLong());
+        verify(tvShowRepository, times(1)).save(any());
+        assertEquals(mockGivenTvShow.getName(), tvShowCaptor.getValue().getName());
+        assertEquals(mockGivenTvShow.getName(), tvShowRest.getName());
     }
 }
