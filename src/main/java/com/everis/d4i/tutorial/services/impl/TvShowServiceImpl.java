@@ -1,27 +1,31 @@
 package com.everis.d4i.tutorial.services.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.persistence.EntityNotFoundException;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.everis.d4i.tutorial.entities.TvShow;
+import com.everis.d4i.tutorial.exceptions.InternalServerErrorException;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.TvShowRest;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.TvShowService;
+import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class TvShowServiceImpl implements TvShowService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(TvShowServiceImpl.class);
+
 	@Autowired
 	private TvShowRepository tvShowRepository;
 
-	private ModelMapper modelMapper = new ModelMapper();
+	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
 	public List<TvShowRest> getTvShowsByCategory(Long categoryId) throws NetflixException {
@@ -42,4 +46,26 @@ public class TvShowServiceImpl implements TvShowService {
 
 	}
 
+	@Override
+	public TvShowRest patchTvShowName(Long tvShowId, TvShowRest tvShowRest)
+			throws NetflixException {
+
+		TvShow tvShow;
+		try {
+			tvShow = tvShowRepository.getOne(tvShowId);
+		} catch (EntityNotFoundException entityNotFoundException) {
+			throw new NotFoundException(entityNotFoundException.getMessage());
+		}
+
+		tvShow.setName(tvShowRest.getName());
+
+		try {
+			tvShow = tvShowRepository.save(tvShow);
+		} catch (Exception e) {
+			LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
+			throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+		}
+
+		return modelMapper.map(tvShow, TvShowRest.class);
+	}
 }
