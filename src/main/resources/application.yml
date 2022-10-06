@@ -4,21 +4,21 @@ server:
 spring:
   application:
     name: micro-api-finance
-  datasource:
-    url: jdbc:h2:mem:mydb
+  datasource:    
+    url: jdbc:h2:tcp://localhost:7001/mem:mydb
     username: sa
     password: 
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: create-drop  # OPTIONS: none, validate, update, create-drop                              
+      ddl-auto: validate  # OPTIONS: none, validate, update, create-drop                              
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss
-  h2:
-    console.enabled: true  # Enables H2 browser page on: /h2-console       
+  #h2:
+  #  console.enabled: true  # Enables H2 browser page on: /h2-console       
         
 eureka:
   client:    

@@ -1,20 +1,14 @@
 package demo.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import demo.entities.PaymentEntity;
 import demo.model.PaymentOrderDTO;
-import demo.repository.order.PaymentRepository;
+import demo.repository.PaymentRepository;
 
 
 
