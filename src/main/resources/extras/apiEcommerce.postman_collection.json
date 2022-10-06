@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/orders/",
+					"raw": "http://localhost:8086/api/orders/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8086",
 					"path": [
 						"api",
 						"orders",
@@ -32,13 +32,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/orders/",
+					"raw": "http://localhost:8765/ecommerce/api/orders/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8765",
 					"path": [
+						"ecommerce",
 						"api",
 						"orders",
 						""
@@ -53,12 +54,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/orders/1",
+					"raw": "http://localhost:8086/api/orders/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8086",
 					"path": [
 						"api",
 						"orders",
@@ -75,7 +76,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \r\n    \"code\": \"000010\",\r\n    \"date\": \"01/01/2022\",\r\n    \"customer\": {\r\n        \"id\": 1        \r\n    },\r\n    \"total_value\": 2000.0\r\n}",
+					"raw": "{    \r\n    \"code\": \"000035\",\r\n    \"date\": \"01/01/2022\",\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"fiscal_number\": \"02366655588\"       \r\n    },\r\n    \"total_value\": 12000.0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,12 +84,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/orders",
+					"raw": "http://localhost:8086/api/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8086",
 					"path": [
 						"api",
 						"orders"
@@ -104,7 +105,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \r\n     \"id\": 1,  \r\n    \"code\": \"000001\",\r\n    \"date\": \"01/01/2022\",\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"name\": \"John Lenon\",\r\n        \"email\": \"jo@sky.com\",\r\n        \"fiscal_number\": \"02366655588\"\r\n    },\r\n    \"total_value\": 2000.1\r\n}",
+					"raw": "{  \r\n    \"id\": 1,  \r\n    \"code\": \"000010\",\r\n    \"date\": \"01/01/2023\",\r\n    \"customer\": {\r\n        \"id\": 1,\r\n        \"name\": \"John Lenon\",\r\n        \"email\": \"jo@sky.com\",\r\n        \"fiscal_number\": \"02366655588\"\r\n    },\r\n    \"total_value\": 88000.1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,12 +113,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/orders/1",
+					"raw": "http://localhost:8086/api/orders/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8086",
 					"path": [
 						"api",
 						"orders",
@@ -142,12 +143,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/orders/1",
+					"raw": "http://localhost:8086/api/orders/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8086",
 					"path": [
 						"api",
 						"orders",
