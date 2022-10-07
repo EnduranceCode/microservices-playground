@@ -9,7 +9,6 @@ import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.TvShowService;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -76,8 +75,7 @@ public class TvShowServiceImpl implements TvShowService {
 		try {
 			tvShowRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-			throw new EmptyResultDataAccessException(
-					Objects.requireNonNull(emptyResultDataAccessException.getMessage()), 1);
+			throw new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_TV_SHOW);
 		} catch (Exception e) {
 			LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
 			throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
