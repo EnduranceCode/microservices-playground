@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -96,5 +97,17 @@ public class TvShowControllerImplTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON)
                 .content(objectWriter.writeValueAsString(mockGivenTvShow))).andExpect(
                 status().isOk());
+    }
+
+    @Test
+    public void deleteTvShow() throws Exception {
+        final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + CATEGORY_ID;
+
+        tvShowService.deleteById(TV_SHOW_ID);
+
+        when(tvShowService.deleteById(anyLong())).thenReturn(new TvShowRest());
+
+        mockMvc.perform(delete(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL))
+               .andExpect(status().isNoContent());
     }
 }

@@ -84,4 +84,11 @@ public class TvShowServiceImplTest {
         assertEquals(mockGivenTvShow.getName(), tvShowCaptor.getValue().getName());
         assertEquals(mockGivenTvShow.getName(), tvShowRest.getName());
     }
+
+    @Test
+    public void deleteById() throws NetflixException {
+        tvShowService.deleteById(TV_SHOW_ID);
+
+        verify(tvShowRepository, times(1)).deleteById(anyLong());
+    }
 }
