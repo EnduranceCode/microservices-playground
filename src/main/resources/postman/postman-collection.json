@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "d60eed4c-cb48-497d-a0ca-f74df903b7d3",
+		"name": "Netflix Tutorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9273557"
+	},
+	"item": [
+		{
+			"name": "Actor | Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Emilia Clarke\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/actors",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | Get list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/actors",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/actors/:id",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | List Seasons by Actor ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/actors/:id/seasons",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors",
+						":id",
+						"seasons"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | List Chapters by Actor ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/actors/:id/chapters",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors",
+						":id",
+						"chapters"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | Create Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Emilia Clarke\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/actors/:d",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors",
+						":d"
+					],
+					"variable": [
+						{
+							"key": "d",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actor | Delete by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/actors/:id",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"actors",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category | Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"ROMANCE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/categories",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category | Get list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/categories",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Show | Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:id",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Show | Get Prizes by TV Show ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:id/prizes",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":id",
+						"prizes"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Show | Get by Category ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows?categoryId=1",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Show | Update name by ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Game of Thrones\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:id",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Show | Delete by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:id",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Season | Get list by TV Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:tv-show-id/seasons",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":tv-show-id",
+						"seasons"
+					],
+					"variable": [
+						{
+							"key": "tv-show-id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Season | Get list by TV Show and Season Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:tv-show-id/seasons/:number",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":tv-show-id",
+						"seasons",
+						":number"
+					],
+					"variable": [
+						{
+							"key": "tv-show-id",
+							"value": null
+						},
+						{
+							"key": "number",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chapter | Get list by TV Show ID and Season Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:tv-show-id/seasons/:seasonNumber/chapters",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":tv-show-id",
+						"seasons",
+						":seasonNumber",
+						"chapters"
+					],
+					"variable": [
+						{
+							"key": "tv-show-id",
+							"value": null
+						},
+						{
+							"key": "seasonNumber",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chapter | Get by TV Show ID and Season Number and Chapter Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:tv-show-id/seasons/:seasonNumber/chapters/:number",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":tv-show-id",
+						"seasons",
+						":seasonNumber",
+						"chapters",
+						":number"
+					],
+					"variable": [
+						{
+							"key": "tv-show-id",
+							"value": null
+						},
+						{
+							"key": "seasonNumber",
+							"value": null
+						},
+						{
+							"key": "number",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chapter | Update name by TV Show ID and Season Number and Chapter ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Capitulo 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/tv-shows/:tv-show-id/seasons/:seasonNumber/chapters/:chapterNumber",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"tv-shows",
+						":tv-show-id",
+						"seasons",
+						":seasonNumber",
+						"chapters",
+						":chapterNumber"
+					],
+					"variable": [
+						{
+							"key": "tv-show-id",
+							"value": null
+						},
+						{
+							"key": "seasonNumber",
+							"value": null
+						},
+						{
+							"key": "chapterNumber",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "PORT_NUMBER",
+			"value": "8088",
+			"type": "string"
+		},
+		{
+			"key": "APP_NAME",
+			"value": "netflix",
+			"type": "string"
+		},
+		{
+			"key": "API_VERSION",
+			"value": "v1",
+			"type": "string"
+		},
+		{
+			"key": "API_URL",
+			"value": "{{BASE_URL}}:{{PORT_NUMBER}}/{{APP_NAME}}/{{API_VERSION}}",
+			"type": "string"
+		}
+	]
+}
