@@ -2,11 +2,13 @@ package com.everis.d4i.tutorial.services.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.everis.d4i.tutorial.entities.Actor;
+import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
 import com.everis.d4i.tutorial.repositories.ActorRepository;
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class ActorServiceImplTest {
 
     @Mock
     ActorRepository actorRepository;
+
+    static final Long ACTOR_ID = 1L;
 
     @Before
     public void setUp() throws Exception {
@@ -49,5 +53,19 @@ public class ActorServiceImplTest {
         verify(actorRepository, times(1)).findAll();
         assertNotNull(actors);
         assertEquals(2, actors.size());
+    }
+
+    @Test
+    public void getActorById() throws NetflixException {
+        Actor mockActor = new Actor();
+        mockActor.setId(ACTOR_ID);
+        mockActor.setName("Michelle Fairley");
+
+        when(actorRepository.getOne(anyLong())).thenReturn(mockActor);
+
+        ActorRest actor = actorService.getActorById(ACTOR_ID);
+
+        verify(actorRepository, times(1)).getOne(anyLong());
+        assertEquals(ACTOR_ID, actor.getId());
     }
 }

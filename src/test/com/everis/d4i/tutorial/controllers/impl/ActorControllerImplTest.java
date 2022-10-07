@@ -1,5 +1,6 @@
 package com.everis.d4i.tutorial.controllers.impl;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,6 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 public class ActorControllerImplTest {
+
+    static final Long ACTOR_ID = 1L;
 
     @InjectMocks
     ActorControllerImpl actorController;
@@ -56,5 +59,23 @@ public class ActorControllerImplTest {
 
         mockMvc.perform(get(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1
                 + RestConstants.RESOURCE_ACTOR)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getActorById() throws Exception {
+        final String URL = "/" + ACTOR_ID;
+
+        ActorRest mockActor = new ActorRest();
+        mockActor.setId(ACTOR_ID);
+        mockActor.setName("Michelle Fairley");
+
+        when(actorService.getActorById(ACTOR_ID)).thenReturn(mockActor);
+
+        actorService.getActorById(ACTOR_ID);
+
+        verify(actorService, times(1)).getActorById(anyLong());
+
+        mockMvc.perform(get(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1
+                + RestConstants.RESOURCE_ACTOR + URL)).andExpect(status().isOk());
     }
 }
