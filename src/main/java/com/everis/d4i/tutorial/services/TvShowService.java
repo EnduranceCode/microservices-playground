@@ -10,5 +10,7 @@ public interface TvShowService {
 
 	TvShowRest getTvShowById(Long id) throws NetflixException;
 
-	TvShowRest patchTvShowName(Long tvShowId, TvShowRest tvShowRest) throws NetflixException;
+	TvShowRest patchTvShowName(Long id, TvShowRest tvShowRest) throws NetflixException;
+
+	TvShowRest deleteById(Long id) throws NetflixException;
 }

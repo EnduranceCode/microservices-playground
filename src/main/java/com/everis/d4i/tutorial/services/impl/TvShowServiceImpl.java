@@ -9,12 +9,14 @@ import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.TvShowService;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -67,5 +69,20 @@ public class TvShowServiceImpl implements TvShowService {
 		}
 
 		return modelMapper.map(tvShow, TvShowRest.class);
+	}
+
+	@Override
+	public TvShowRest deleteById(Long id) throws NetflixException {
+		try {
+			tvShowRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+			throw new EmptyResultDataAccessException(
+					Objects.requireNonNull(emptyResultDataAccessException.getMessage()), 1);
+		} catch (Exception e) {
+			LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
+			throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+		}
+
+		return modelMapper.map(new TvShow(), TvShowRest.class);
 	}
 }

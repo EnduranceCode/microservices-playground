@@ -94,6 +94,7 @@ public class TvShowControllerImplTest {
 
         mockMvc.perform(patch(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL)
                 .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON)
-                .content(objectWriter.writeValueAsString(mockGivenTvShow)));
+                .content(objectWriter.writeValueAsString(mockGivenTvShow))).andExpect(
+                status().isOk());
     }
 }

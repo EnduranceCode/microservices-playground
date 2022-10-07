@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,12 +49,21 @@ public class TvShowControllerImpl implements TvShowController {
 
 	@Override
 	@ResponseStatus(HttpStatus.OK)
-	@PatchMapping(value = RestConstants.RESOURCE_TV_SHOW_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NetflixResponse<TvShowRest> patchTvShowName(@PathVariable Long tvShowId,
+	@PatchMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	public NetflixResponse<TvShowRest> patchTvShowName(@PathVariable Long id,
 			@ApiParam(value = RestConstants.PARAMETER_TV_SHOW, required = true) @RequestBody @Valid final TvShowRest tvShowRest)
 			throws NetflixException {
 
 		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
-				CommonConstants.OK, tvShowService.patchTvShowName(tvShowId, tvShowRest));
+				CommonConstants.OK, tvShowService.patchTvShowName(id, tvShowRest));
+	}
+
+	@Override
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	public NetflixResponse<TvShowRest> deleteTvShow(@PathVariable Long id) throws NetflixException {
+
+		return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+				CommonConstants.OK, tvShowService.deleteById(id));
 	}
 }
