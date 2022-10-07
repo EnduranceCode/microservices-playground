@@ -8,4 +8,6 @@ import java.util.List;
 public interface ActorController {
 
     NetflixResponse<List<ActorRest>> getActors() throws NetflixException;
+
+    NetflixResponse<ActorRest> getActorById(Long id) throws NetflixException;
 }

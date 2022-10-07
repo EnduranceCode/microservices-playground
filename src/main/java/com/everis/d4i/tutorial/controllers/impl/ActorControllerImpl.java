@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,14 @@ public class ActorControllerImpl implements ActorController {
 
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK, actorService.getActors());
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<ActorRest> getActorById(@PathVariable Long id) throws NetflixException {
+
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK, actorService.getActorById(id));
     }
 }
