@@ -2,6 +2,7 @@ package com.everis.d4i.tutorial.services.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,6 +22,9 @@ import org.mockito.MockitoAnnotations;
 
 public class ActorServiceImplTest {
 
+    static final String FIRST_ACTOR_NAME = "Michelle Fairley";
+    static final String SECOND_ACTOR_NAME = "Sean Bean";
+
     @InjectMocks
     ActorServiceImpl actorService;
 
@@ -38,10 +42,10 @@ public class ActorServiceImplTest {
     public void getActors() {
         Actor mockFirstActor = new Actor();
         mockFirstActor.setId(1L);
-        mockFirstActor.setName("Michelle Fairley");
+        mockFirstActor.setName(FIRST_ACTOR_NAME);
         Actor mockSecondActor = new Actor();
         mockSecondActor.setId(2L);
-        mockSecondActor.setName("Sean Bean");
+        mockSecondActor.setName(SECOND_ACTOR_NAME);
         List<Actor> mockActors = new ArrayList<>();
         mockActors.add(mockFirstActor);
         mockActors.add(mockSecondActor);
@@ -59,7 +63,7 @@ public class ActorServiceImplTest {
     public void getActorById() throws NetflixException {
         Actor mockActor = new Actor();
         mockActor.setId(ACTOR_ID);
-        mockActor.setName("Michelle Fairley");
+        mockActor.setName(FIRST_ACTOR_NAME);
 
         when(actorRepository.getOne(anyLong())).thenReturn(mockActor);
 
@@ -67,5 +71,21 @@ public class ActorServiceImplTest {
 
         verify(actorRepository, times(1)).getOne(anyLong());
         assertEquals(ACTOR_ID, actor.getId());
+    }
+
+    @Test
+    public void createActor() throws NetflixException {
+        Actor mockActor = new Actor();
+        mockActor.setId(ACTOR_ID);
+        mockActor.setName(FIRST_ACTOR_NAME);
+
+        ActorRest mockActorRest = new ActorRest();
+        mockActor.setName(FIRST_ACTOR_NAME);
+
+        when(actorRepository.save(any())).thenReturn(mockActor);
+
+        ActorRest actor = actorService.createActor(mockActorRest);
+
+        verify(actorRepository, times(1)).save(any());
     }
 }
