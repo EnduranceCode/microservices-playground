@@ -102,7 +102,7 @@ public class ActorControllerImpl implements ActorController {
 
     @Override
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = RestConstants.RESOURCE_ACTOR_CHAPTERS, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = RestConstants.RESOURCE_ACTOR_CHAPTER, produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<List<ChapterRest>> getChaptersByActorId(@PathVariable Long id)
             throws NetflixException {
 

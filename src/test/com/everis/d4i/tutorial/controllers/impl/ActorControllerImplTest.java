@@ -12,7 +12,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.everis.d4i.tutorial.json.ActorRest;
+import com.everis.d4i.tutorial.json.ChapterRest;
+import com.everis.d4i.tutorial.json.SeasonRest;
 import com.everis.d4i.tutorial.services.ActorService;
+import com.everis.d4i.tutorial.services.ChapterService;
+import com.everis.d4i.tutorial.services.SeasonService;
 import com.everis.d4i.tutorial.utils.constants.RestConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -38,6 +42,12 @@ public class ActorControllerImplTest {
 
     @Mock
     ActorService actorService;
+
+    @Mock
+    ChapterService chapterService;
+
+    @Mock
+    SeasonService seasonService;
 
     ObjectWriter objectWriter;
 
@@ -146,5 +156,59 @@ public class ActorControllerImplTest {
 
         mockMvc.perform(delete(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL))
                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void getSeasonsByActorId() throws Exception {
+        final String URL = RestConstants.RESOURCE_ACTOR_SEASON.replace("{id}",
+                String.valueOf(ACTOR_ID));
+
+        SeasonRest mockFirstSeason = new SeasonRest();
+        mockFirstSeason.setId(1L);
+        mockFirstSeason.setName("One");
+
+        SeasonRest mockSecondSeason = new SeasonRest();
+        mockSecondSeason.setId(1L);
+        mockSecondSeason.setName("Two");
+
+        List<SeasonRest> mockSeasons = new ArrayList<>();
+        mockSeasons.add(mockFirstSeason);
+        mockSeasons.add(mockSecondSeason);
+
+        when(seasonService.getSeasonsByActorId(anyLong())).thenReturn(mockSeasons);
+
+        actorController.getSeasonsByActorId(ACTOR_ID);
+
+        verify(seasonService, times(1)).getSeasonsByActorId(anyLong());
+
+        mockMvc.perform(get(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1
+                + RestConstants.RESOURCE_ACTOR + URL)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getChaptersByActorId() throws Exception {
+        final String URL = RestConstants.RESOURCE_ACTOR_CHAPTER.replace("{id}",
+                String.valueOf(ACTOR_ID));
+
+        ChapterRest mockFirstChapter = new ChapterRest();
+        mockFirstChapter.setId(1L);
+        mockFirstChapter.setName("Capitulo 1");
+
+        ChapterRest mockSecondChapter = new ChapterRest();
+        mockSecondChapter.setId(1L);
+        mockSecondChapter.setName("Capitulo 2");
+
+        List<ChapterRest> mockChapters = new ArrayList<>();
+        mockChapters.add(mockFirstChapter);
+        mockChapters.add(mockSecondChapter);
+
+        when(chapterService.getChaptersByActorId(anyLong())).thenReturn(mockChapters);
+
+        actorController.getChaptersByActorId(ACTOR_ID);
+
+        verify(chapterService, times(1)).getChaptersByActorId(anyLong());
+
+        mockMvc.perform(get(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1
+                + RestConstants.RESOURCE_ACTOR + URL)).andExpect(status().isOk());
     }
 }

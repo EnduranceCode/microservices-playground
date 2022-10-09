@@ -12,6 +12,8 @@ import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ChapterRest;
 import com.everis.d4i.tutorial.repositories.ChapterRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +30,7 @@ public class ChapterServiceImplTest {
     @Mock
     ChapterRepository chapterRepository;
 
+    static final Long ACTOR_ID = 1L;
     static final Long TV_SHOW_ID = 1L;
     static final short SEASON_NUMBER = 1;
     static final Long CHAPTER_ID = 1L;
@@ -65,5 +68,28 @@ public class ChapterServiceImplTest {
         verify(chapterRepository, times(1)).save(any());
         assertEquals(mockGivenChapter.getName(), chapterCaptor.getValue().getName());
         assertEquals(mockGivenChapter.getName(), chapterRest.getName());
+    }
+
+    @Test
+    public void getChaptersByActorId() throws NetflixException {
+        Chapter mockFirstChapter = new Chapter();
+        mockFirstChapter.setId(1L);
+        mockFirstChapter.setName("Capitulo 1");
+
+        Chapter mockSecondChapter = new Chapter();
+        mockSecondChapter.setId(1L);
+        mockSecondChapter.setName("Capitulo 2");
+
+        List<Chapter> mockChapters = new ArrayList<>();
+        mockChapters.add(mockFirstChapter);
+        mockChapters.add(mockSecondChapter);
+
+        when(chapterRepository.getChaptersByActorId(anyLong())).thenReturn(mockChapters);
+
+        List<ChapterRest> chapters = chapterService.getChaptersByActorId(ACTOR_ID);
+
+        verify(chapterRepository, times(1)).getChaptersByActorId(anyLong());
+
+        assertEquals(mockChapters.size(), chapters.size());
     }
 }
