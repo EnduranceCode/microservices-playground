@@ -11,10 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CHAPTERS")
+@NamedQuery(name = "Chapter.getChaptersByActorId", query = "SELECT c FROM Chapter c JOIN c.actors a WHERE a.id = :actorId")
 public class Chapter implements Serializable {
 
 	private static final long serialVersionUID = 8725949484031409482L;

@@ -6,11 +6,14 @@ import java.util.List;
 
 public interface ChapterService {
 
-	List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber) throws NetflixException;
+	List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
+			throws NetflixException;
 
-	ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber) throws NetflixException;
+	ChapterRest getChapterByTvShowIdAndSeasonNumberAndChapterNumber(Long tvShowId,
+			short seasonNumber, short chapterNumber) throws NetflixException;
 
 	ChapterRest patchChapterName(Long tvShowId, short seasonNumber, Long chapterId,
 			ChapterRest chapterRest) throws NetflixException;
+
+	List<ChapterRest> getChaptersByActorId(Long actorId) throws NetflixException;
 }

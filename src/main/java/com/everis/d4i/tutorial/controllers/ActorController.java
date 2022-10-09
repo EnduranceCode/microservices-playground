@@ -2,6 +2,8 @@ package com.everis.d4i.tutorial.controllers;
 
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
+import com.everis.d4i.tutorial.json.ChapterRest;
+import com.everis.d4i.tutorial.json.SeasonRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 import java.util.List;
 
@@ -16,4 +18,8 @@ public interface ActorController {
     NetflixResponse<ActorRest> updateActor(Long id, ActorRest actorRest) throws NetflixException;
 
     NetflixResponse<ActorRest> deleteActorById(Long id) throws NetflixException;
+
+    NetflixResponse<List<SeasonRest>> getSeasonsByActorId(Long id) throws NetflixException;
+
+    NetflixResponse<List<ChapterRest>> getChaptersByActorId(Long id) throws NetflixException;
 }

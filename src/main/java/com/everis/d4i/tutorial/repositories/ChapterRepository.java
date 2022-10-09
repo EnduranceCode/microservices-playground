@@ -11,9 +11,11 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
 	List<Chapter> findBySeasonTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber);
 
-	Optional<Chapter> findBySeasonTvShowIdAndSeasonNumberAndNumber(Long tvShowId, short seasonNumber,
-			short chapterNumber);
+	Optional<Chapter> findBySeasonTvShowIdAndSeasonNumberAndNumber(Long tvShowId,
+			short seasonNumber, short chapterNumber);
 
 	Optional<Chapter> findBySeasonTvShowIdAndSeasonNumberAndId(Long tvShowId, short seasonNumber,
 			Long chapterId);
+
+	List<Chapter> getChaptersByActorId(Long actorId);
 }

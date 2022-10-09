@@ -3,8 +3,12 @@ package com.everis.d4i.tutorial.controllers.impl;
 import com.everis.d4i.tutorial.controllers.ActorController;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.ActorRest;
+import com.everis.d4i.tutorial.json.ChapterRest;
+import com.everis.d4i.tutorial.json.SeasonRest;
 import com.everis.d4i.tutorial.responses.NetflixResponse;
 import com.everis.d4i.tutorial.services.ActorService;
+import com.everis.d4i.tutorial.services.ChapterService;
+import com.everis.d4i.tutorial.services.SeasonService;
 import com.everis.d4i.tutorial.utils.constants.CommonConstants;
 import com.everis.d4i.tutorial.utils.constants.RestConstants;
 import io.swagger.annotations.ApiParam;
@@ -30,6 +34,12 @@ public class ActorControllerImpl implements ActorController {
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    ChapterService chapterService;
+
+    @Autowired
+    SeasonService seasonService;
 
     @Override
     @ResponseStatus(HttpStatus.OK)
@@ -78,5 +88,25 @@ public class ActorControllerImpl implements ActorController {
 
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK, actorService.deleteById(id));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = RestConstants.RESOURCE_ACTOR_SEASON, produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<List<SeasonRest>> getSeasonsByActorId(@PathVariable Long id)
+            throws NetflixException {
+
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK, seasonService.getSeasonsByActorId(id));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = RestConstants.RESOURCE_ACTOR_CHAPTERS, produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<List<ChapterRest>> getChaptersByActorId(@PathVariable Long id)
+            throws NetflixException {
+
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK, chapterService.getChaptersByActorId(id));
     }
 }

@@ -22,16 +22,19 @@ public class ChapterServiceImpl implements ChapterService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ChapterServiceImpl.class);
 
+	private final ModelMapper modelMapper = new ModelMapper();
+
 	@Autowired
 	private ChapterRepository chapterRepository;
-
-	private ModelMapper modelMapper = new ModelMapper();
 
 	@Override
 	public List<ChapterRest> getChaptersByTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber)
 			throws NetflixException {
-		return chapterRepository.findBySeasonTvShowIdAndSeasonNumber(tvShowId, seasonNumber).stream()
-				.map(chapter -> modelMapper.map(chapter, ChapterRest.class)).collect(Collectors.toList());
+
+		return chapterRepository.findBySeasonTvShowIdAndSeasonNumber(tvShowId, seasonNumber)
+								.stream()
+								.map(chapter -> modelMapper.map(chapter, ChapterRest.class))
+								.collect(Collectors.toList());
 	}
 
 	@Override
@@ -66,5 +69,13 @@ public class ChapterServiceImpl implements ChapterService {
 		}
 
 		return modelMapper.map(chapter, ChapterRest.class);
+	}
+
+	@Override
+	public List<ChapterRest> getChaptersByActorId(Long actorId) throws NetflixException {
+
+		return chapterRepository.getChaptersByActorId(actorId).stream()
+								.map(chapter -> modelMapper.map(chapter, ChapterRest.class))
+								.collect(Collectors.toList());
 	}
 }
