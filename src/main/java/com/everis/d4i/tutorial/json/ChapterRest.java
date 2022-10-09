@@ -1,5 +1,6 @@
 package com.everis.d4i.tutorial.json;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +14,7 @@ public class ChapterRest implements Serializable {
 	private short number;
 	private String name;
 	private short duration;
+	@JsonIgnore
 	private List<ActorRest> actors;
 
 	public Long getId() {

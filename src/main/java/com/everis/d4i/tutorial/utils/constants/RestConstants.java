@@ -14,6 +14,7 @@ public class RestConstants {
 	public static final String RESOURCE_ID = "/{id}";
 	public static final String RESOURCE_NUMBER = "/{number}";
 
+	public static final String PARAMETER_ACTOR = "actor";
 	public static final String PARAMETER_CATEGORY = "category";
 	public static final String PARAMETER_TV_SHOW = "tv-show";
 	public static final String PARAMETER_TV_CHAPTER = "chapter";

@@ -2,12 +2,14 @@ package com.everis.d4i.tutorial.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActorRest implements Serializable {
 
     private Long id;
     private String name;
+    private List<ChapterRest> chapters;
 
     public Long getId() {
         return id;
@@ -23,5 +25,13 @@ public class ActorRest implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ChapterRest> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<ChapterRest> chapters) {
+        this.chapters = chapters;
     }
 }
