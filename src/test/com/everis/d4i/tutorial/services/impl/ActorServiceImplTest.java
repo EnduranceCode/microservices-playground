@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -87,5 +88,35 @@ public class ActorServiceImplTest {
         ActorRest actor = actorService.createActor(mockActorRest);
 
         verify(actorRepository, times(1)).save(any());
+    }
+
+    @Test
+    public void updateActor() throws NetflixException {
+        final String NEW_NAME = "Emilia Clarke";
+
+        ActorRest mockGivenActor = new ActorRest();
+        mockGivenActor.setId(ACTOR_ID);
+        mockGivenActor.setName(NEW_NAME);
+
+        Actor mockExistingActor = new Actor();
+        mockExistingActor.setId(ACTOR_ID);
+        mockExistingActor.setName(FIRST_ACTOR_NAME);
+
+        Actor mockupdatedActor = new Actor();
+        mockupdatedActor.setId(ACTOR_ID);
+        mockupdatedActor.setName(NEW_NAME);
+
+        ArgumentCaptor<Actor> actorCaptor = ArgumentCaptor.forClass(Actor.class);
+
+        when(actorRepository.getOne(ACTOR_ID)).thenReturn(mockExistingActor);
+        when(actorRepository.save(actorCaptor.capture())).thenReturn(mockupdatedActor);
+
+        ActorRest actor = actorService.updateActor(mockGivenActor.getId(), mockGivenActor);
+
+        verify(actorRepository, times(1)).getOne(anyLong());
+        verify(actorRepository, times(1)).save(any());
+
+        assertEquals(mockGivenActor.getName(), actorCaptor.getValue().getName());
+        assertEquals(mockGivenActor.getName(), actor.getName());
     }
 }

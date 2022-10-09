@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -105,6 +106,32 @@ public class ActorControllerImplTest {
                        + RestConstants.RESOURCE_ACTOR).contentType(MediaType.APPLICATION_JSON_VALUE)
                                                       .accept(MediaType.APPLICATION_JSON)
                                                       .content(objectWriter.writeValueAsString(mockActor)))
+               .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateActor() throws Exception {
+        final String NEW_NAME = "Emilia Clarke";
+        final String URL = "/" + ACTOR_ID;
+
+        ActorRest mockGivenActor = new ActorRest();
+        mockGivenActor.setId(ACTOR_ID);
+        mockGivenActor.setName(NEW_NAME);
+
+        ActorRest mockUpdatedActor = new ActorRest();
+        mockUpdatedActor.setId(ACTOR_ID);
+        mockUpdatedActor.setName(NEW_NAME);
+
+        when(actorService.updateActor(anyLong(), any())).thenReturn(mockUpdatedActor);
+
+        actorController.updateActor(ACTOR_ID, mockGivenActor);
+
+        verify(actorService, times(1)).updateActor(anyLong(), any());
+
+        mockMvc.perform(patch(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1
+                       + RestConstants.RESOURCE_ACTOR + URL).contentType(MediaType.APPLICATION_JSON_VALUE)
+                                                            .accept(MediaType.APPLICATION_JSON).content(
+                               objectWriter.writeValueAsString(mockGivenActor)))
                .andExpect(status().isOk());
     }
 }
