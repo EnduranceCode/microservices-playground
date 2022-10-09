@@ -10,8 +10,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.everis.d4i.tutorial.json.AwardRest;
 import com.everis.d4i.tutorial.json.CategoryRest;
 import com.everis.d4i.tutorial.json.TvShowRest;
+import com.everis.d4i.tutorial.services.AwardService;
 import com.everis.d4i.tutorial.services.TvShowService;
 import com.everis.d4i.tutorial.utils.constants.RestConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,8 +31,16 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 public class TvShowControllerImplTest {
 
+    static final Long CATEGORY_ID = 1L;
+    static final Long TV_SHOW_ID = 1L;
+    static final String FIRST_AWARD_NAME = "American Film Institute Awards";
+    static final String SECOND_AWARD_NAME = "Primetime Emmy Award";
+
     @InjectMocks
     TvShowControllerImpl tvShowController;
+
+    @Mock
+    AwardService awardService;
 
     @Mock
     TvShowService tvShowService;
@@ -38,9 +48,6 @@ public class TvShowControllerImplTest {
     ObjectWriter objectWriter;
 
     MockMvc mockMvc;
-
-    static final Long CATEGORY_ID = 1L;
-    static final Long TV_SHOW_ID = 1L;
 
     @Before
     public void setUp() {
@@ -103,11 +110,37 @@ public class TvShowControllerImplTest {
     public void deleteTvShow() throws Exception {
         final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + TV_SHOW_ID;
 
-        tvShowService.deleteById(TV_SHOW_ID);
-
         when(tvShowService.deleteById(anyLong())).thenReturn(new TvShowRest());
+
+        tvShowService.deleteById(TV_SHOW_ID);
 
         mockMvc.perform(delete(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL))
                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void getAwardsByTvShowId() throws Exception {
+        final String URL =
+                RestConstants.RESOURCE_TV_SHOW + "/" + TV_SHOW_ID + RestConstants.RESOURCE_AWARDS;
+
+        AwardRest mockFirstAward = new AwardRest();
+        mockFirstAward.setId(1L);
+        mockFirstAward.setName(FIRST_AWARD_NAME);
+        AwardRest mockSecondAward = new AwardRest();
+        mockSecondAward.setId(2L);
+        mockSecondAward.setName(SECOND_AWARD_NAME);
+        List<AwardRest> mockAwards = new ArrayList<>();
+        mockAwards.add(mockFirstAward);
+        mockAwards.add(mockSecondAward);
+
+        when(awardService.getAwardsByTvShowId(anyLong())).thenReturn(mockAwards);
+
+        awardService.getAwardsByTvShowId(TV_SHOW_ID);
+
+        verify(awardService, times(1)).getAwardsByTvShowId(anyLong());
+
+        mockMvc.perform(get(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL))
+               .andExpect(status().isOk());
+
     }
 }

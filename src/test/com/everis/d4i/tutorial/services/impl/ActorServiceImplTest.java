@@ -23,6 +23,7 @@ import org.mockito.MockitoAnnotations;
 
 public class ActorServiceImplTest {
 
+    static final Long ACTOR_ID = 1L;
     static final String FIRST_ACTOR_NAME = "Michelle Fairley";
     static final String SECOND_ACTOR_NAME = "Sean Bean";
 
@@ -32,15 +33,13 @@ public class ActorServiceImplTest {
     @Mock
     ActorRepository actorRepository;
 
-    static final Long ACTOR_ID = 1L;
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void getActors() {
+    public void getActors() throws NetflixException {
         Actor mockFirstActor = new Actor();
         mockFirstActor.setId(1L);
         mockFirstActor.setName(FIRST_ACTOR_NAME);
