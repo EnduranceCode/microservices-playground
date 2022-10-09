@@ -18,6 +18,8 @@ import javax.persistence.Table;
 @Table(name = "ACTORS")
 public class Actor implements Serializable {
 
+    private static final long serialVersionUID = 8120018875931396894L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

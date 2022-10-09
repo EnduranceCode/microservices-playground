@@ -37,7 +37,7 @@ public class ActorServiceImpl implements ActorService {
     private ChapterRepository chapterRepository;
 
     @Override
-    public List<ActorRest> getActors() {
+    public List<ActorRest> getActors() throws NetflixException {
 
         return actorRepository.findAll().stream()
                               .map(actor -> modelMapper.map(actor, ActorRest.class))

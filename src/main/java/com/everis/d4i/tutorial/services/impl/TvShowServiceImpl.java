@@ -23,16 +23,17 @@ public class TvShowServiceImpl implements TvShowService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TvShowServiceImpl.class);
 
+	private final ModelMapper modelMapper = new ModelMapper();
+
 	@Autowired
 	private TvShowRepository tvShowRepository;
-
-	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
 	public List<TvShowRest> getTvShowsByCategory(Long categoryId) throws NetflixException {
 
 		return tvShowRepository.findByCategoryId(categoryId).stream()
-				.map(tvShow -> modelMapper.map(tvShow, TvShowRest.class)).collect(Collectors.toList());
+							   .map(tvShow -> modelMapper.map(tvShow, TvShowRest.class))
+							   .collect(Collectors.toList());
 
 	}
 

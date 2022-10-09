@@ -7,6 +7,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActorRest implements Serializable {
 
+    private static final long serialVersionUID = 3862482792808603266L;
+
     private Long id;
     private String name;
     private List<ChapterRest> chapters;

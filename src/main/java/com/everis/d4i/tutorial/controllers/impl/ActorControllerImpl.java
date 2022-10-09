@@ -74,7 +74,8 @@ public class ActorControllerImpl implements ActorController {
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
     public NetflixResponse<ActorRest> updateActor(@PathVariable Long id,
-            @RequestBody @Valid final ActorRest actorRest) throws NetflixException {
+            @ApiParam(value = RestConstants.PARAMETER_ACTOR, required = true) @RequestBody @Valid final ActorRest actorRest)
+            throws NetflixException {
 
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK, actorService.updateActor(id, actorRest));

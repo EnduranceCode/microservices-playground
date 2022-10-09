@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ActorService {
 
-    List<ActorRest> getActors();
+    List<ActorRest> getActors() throws NetflixException;
 
     ActorRest getActorById(Long actorId) throws NetflixException;
 
