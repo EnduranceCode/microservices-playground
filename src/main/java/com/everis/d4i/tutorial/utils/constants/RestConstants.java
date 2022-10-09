@@ -7,6 +7,7 @@ public class RestConstants {
 	public static final String SUCCESS = "Success";
 
 	public static final String RESOURCE_ACTOR = "/actors";
+	public static final String RESOURCE_AWARDS = "/awards";
 	public static final String RESOURCE_ACTOR_SEASON = "/{id}/seasons";
 	public static final String RESOURCE_ACTOR_CHAPTER = "/{id}/chapters";
 	public static final String RESOURCE_CATEGORY = "/categories";

@@ -257,19 +257,19 @@
 			"response": []
 		},
 		{
-			"name": "TV Show | Get Prizes by TV Show ID",
+			"name": "TV Show | Get Awards by TV Show ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{API_URL}}/tv-shows/:id/prizes",
+					"raw": "{{API_URL}}/tv-shows/:id/awards",
 					"host": [
 						"{{API_URL}}"
 					],
 					"path": [
 						"tv-shows",
 						":id",
-						"prizes"
+						"awards"
 					],
 					"variable": [
 						{
