@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,5 +68,15 @@ public class ActorControllerImpl implements ActorController {
 
         return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK, actorService.updateActor(id, actorRest));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = RestConstants.RESOURCE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    public NetflixResponse<ActorRest> deleteActorById(@PathVariable Long id)
+            throws NetflixException {
+
+        return new NetflixResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK, actorService.deleteById(id));
     }
 }

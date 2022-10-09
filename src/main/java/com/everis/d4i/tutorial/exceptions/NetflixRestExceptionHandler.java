@@ -4,6 +4,7 @@ import com.everis.d4i.tutorial.responses.NetflixResponse;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,7 +23,8 @@ public class NetflixRestExceptionHandler {
 		return new NetflixResponse(ExceptionConstants.ERROR, HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
 	}
 
-	@ExceptionHandler({NetflixException.class, HttpMessageNotReadableException.class})
+	@ExceptionHandler({NetflixException.class, EmptyResultDataAccessException.class,
+			HttpMessageNotReadableException.class})
 	@ResponseBody
 	public NetflixResponse handleLmException(final HttpServletRequest request, final HttpServletResponse response,
 			final NetflixException ex) {

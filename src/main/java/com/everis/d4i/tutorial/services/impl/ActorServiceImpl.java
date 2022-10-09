@@ -19,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +80,20 @@ public class ActorServiceImpl implements ActorService {
         actor = saveActor(actor);
 
         return modelMapper.map(actor, ActorRest.class);
+    }
+
+    @Override
+    public ActorRest deleteById(Long actorId) throws NetflixException {
+        try {
+            actorRepository.deleteById(actorId);
+        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+            throw new NotFoundException(ExceptionConstants.MESSAGE_INEXISTENT_TV_SHOW);
+        } catch (Exception e) {
+            LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, e);
+            throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
+        }
+
+        return modelMapper.map(new ActorRest(), ActorRest.class);
     }
 
     private void addChapters(ActorRest actorRest, Actor actor) throws NotFoundException {
