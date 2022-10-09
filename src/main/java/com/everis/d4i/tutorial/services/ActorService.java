@@ -11,4 +11,6 @@ public interface ActorService {
     ActorRest getActorById(Long actorId) throws NetflixException;
 
     ActorRest createActor(ActorRest actorRest) throws NetflixException;
+
+    ActorRest updateActor(Long actorId, ActorRest actorRest) throws NetflixException;
 }

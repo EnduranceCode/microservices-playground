@@ -57,7 +57,32 @@ public class ActorServiceImpl implements ActorService {
         Actor actor = new Actor();
         actor.setName(actorRest.getName());
 
-        if (actorRest.getChapters() != null && !actorRest.getChapters().isEmpty()) {
+        addChapters(actorRest, actor);
+
+        actor = saveActor(actor);
+
+        return modelMapper.map(actor, ActorRest.class);
+    }
+
+    @Override
+    public ActorRest updateActor(Long actorId, ActorRest actorRest) throws NetflixException {
+        Actor actor;
+        try {
+            actor = actorRepository.getOne(actorId);
+        } catch (EntityNotFoundException entityNotFoundException) {
+            throw new NotFoundException(entityNotFoundException.getMessage());
+        }
+        actor.setName(actorRest.getName());
+
+        addChapters(actorRest, actor);
+
+        actor = saveActor(actor);
+
+        return modelMapper.map(actor, ActorRest.class);
+    }
+
+    private void addChapters(ActorRest actorRest, Actor actor) throws NotFoundException {
+        if (actorRest.getChapters() != null) {
             List<Chapter> chapters = new ArrayList<>();
 
             for (ChapterRest chapterRest : actorRest.getChapters()) {
@@ -69,13 +94,15 @@ public class ActorServiceImpl implements ActorService {
                     }
                 } else {
                     throw new HttpMessageNotReadableException(
-                            ExceptionConstants.MESSAGE_MALFORMED_CHAPtER);
+                            ExceptionConstants.MESSAGE_MALFORMED_CHAPTER);
                 }
             }
 
             actor.setChapters(chapters);
         }
+    }
 
+    private Actor saveActor(Actor actor) throws InternalServerErrorException {
         try {
             actor = actorRepository.save(actor);
         } catch (final Exception e) {
@@ -83,6 +110,6 @@ public class ActorServiceImpl implements ActorService {
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
         }
 
-        return modelMapper.map(actor, ActorRest.class);
+        return actor;
     }
 }
