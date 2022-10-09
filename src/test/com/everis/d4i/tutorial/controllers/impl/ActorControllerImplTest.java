@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -133,5 +134,17 @@ public class ActorControllerImplTest {
                                                             .accept(MediaType.APPLICATION_JSON).content(
                                objectWriter.writeValueAsString(mockGivenActor)))
                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteActorById() throws Exception {
+        final String URL = RestConstants.RESOURCE_ACTOR + "/" + ACTOR_ID;
+
+        actorService.deleteById(ACTOR_ID);
+
+        when(actorService.deleteById(anyLong())).thenReturn(new ActorRest());
+
+        mockMvc.perform(delete(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + URL))
+               .andExpect(status().isNoContent());
     }
 }

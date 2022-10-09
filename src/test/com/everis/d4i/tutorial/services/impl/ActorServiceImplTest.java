@@ -119,4 +119,11 @@ public class ActorServiceImplTest {
         assertEquals(mockGivenActor.getName(), actorCaptor.getValue().getName());
         assertEquals(mockGivenActor.getName(), actor.getName());
     }
+
+    @Test
+    public void deleteById() {
+        actorRepository.deleteById(ACTOR_ID);
+
+        verify(actorRepository, times(1)).deleteById(anyLong());
+    }
 }

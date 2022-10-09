@@ -79,7 +79,7 @@ public class TvShowControllerImplTest {
     public void patchTvShowName() throws Exception {
         final String OLD_NAME = "Old TV Show name";
         final String NEW_NAME = "New TV Show name";
-        final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + CATEGORY_ID;
+        final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + TV_SHOW_ID;
 
         TvShowRest mockGivenTvShow = new TvShowRest();
         mockGivenTvShow.setName(OLD_NAME);
@@ -101,7 +101,7 @@ public class TvShowControllerImplTest {
 
     @Test
     public void deleteTvShow() throws Exception {
-        final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + CATEGORY_ID;
+        final String URL = RestConstants.RESOURCE_TV_SHOW + "/" + TV_SHOW_ID;
 
         tvShowService.deleteById(TV_SHOW_ID);
 
