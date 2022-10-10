@@ -7,10 +7,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.everis.d4i.tutorial.entities.Award;
 import com.everis.d4i.tutorial.entities.Category;
+import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.entities.TvShow;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.json.TvShowRest;
+import com.everis.d4i.tutorial.repositories.AwardRepository;
+import com.everis.d4i.tutorial.repositories.ChapterRepository;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,12 @@ public class TvShowServiceImplTest {
 
     @InjectMocks
     TvShowServiceImpl tvShowService;
+
+    @Mock
+    AwardRepository awardRepository;
+
+    @Mock
+    ChapterRepository chapterRepository;
 
     @Mock
     TvShowRepository tvShowRepository;
@@ -87,6 +97,15 @@ public class TvShowServiceImplTest {
 
     @Test
     public void deleteById() throws NetflixException {
+        List<Award> mockAwards = new ArrayList<>();
+        List<Chapter> mockChapters = new ArrayList<>();
+        TvShow mockTvShow = new TvShow();
+        mockTvShow.setAwards(mockAwards);
+
+        when((awardRepository.getAwardsByTvShowId(anyLong()))).thenReturn(mockAwards);
+        when(chapterRepository.findBySeasonTvShowId(anyLong())).thenReturn(mockChapters);
+        when(tvShowRepository.getOne(anyLong())).thenReturn(mockTvShow);
+
         tvShowService.deleteById(TV_SHOW_ID);
 
         verify(tvShowRepository, times(1)).deleteById(anyLong());

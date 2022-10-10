@@ -1,10 +1,15 @@
 package com.everis.d4i.tutorial.services.impl;
 
+import com.everis.d4i.tutorial.entities.Actor;
+import com.everis.d4i.tutorial.entities.Award;
+import com.everis.d4i.tutorial.entities.Chapter;
 import com.everis.d4i.tutorial.entities.TvShow;
 import com.everis.d4i.tutorial.exceptions.InternalServerErrorException;
 import com.everis.d4i.tutorial.exceptions.NetflixException;
 import com.everis.d4i.tutorial.exceptions.NotFoundException;
 import com.everis.d4i.tutorial.json.TvShowRest;
+import com.everis.d4i.tutorial.repositories.AwardRepository;
+import com.everis.d4i.tutorial.repositories.ChapterRepository;
 import com.everis.d4i.tutorial.repositories.TvShowRepository;
 import com.everis.d4i.tutorial.services.TvShowService;
 import com.everis.d4i.tutorial.utils.constants.ExceptionConstants;
@@ -24,6 +29,12 @@ public class TvShowServiceImpl implements TvShowService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TvShowServiceImpl.class);
 
 	private final ModelMapper modelMapper = new ModelMapper();
+
+	@Autowired
+	private AwardRepository awardRepository;
+
+	@Autowired
+	private ChapterRepository chapterRepository;
 
 	@Autowired
 	private TvShowRepository tvShowRepository;
@@ -73,6 +84,20 @@ public class TvShowServiceImpl implements TvShowService {
 
 	@Override
 	public TvShowRest deleteById(Long id) throws NetflixException {
+		List<Chapter> chapters = chapterRepository.findBySeasonTvShowId(id);
+		for (Chapter chapter : chapters) {
+			for (Actor actor : chapter.getActors()) {
+				actor.getChapters().remove(chapter);
+			}
+			chapter.getActors().clear();
+		}
+
+		List<Award> awards = awardRepository.getAwardsByTvShowId(id);
+		for (Award award : awards) {
+			award.getTvShows().removeIf(tvShow -> tvShow.getId().equals(id));
+		}
+		tvShowRepository.getOne(id).getAwards().clear();
+
 		try {
 			tvShowRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException emptyResultDataAccessException) {

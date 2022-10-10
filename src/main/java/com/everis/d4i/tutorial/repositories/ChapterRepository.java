@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
+	List<Chapter> findBySeasonTvShowId(Long tvShowId);
+
 	List<Chapter> findBySeasonTvShowIdAndSeasonNumber(Long tvShowId, short seasonNumber);
 
 	Optional<Chapter> findBySeasonTvShowIdAndSeasonNumberAndNumber(Long tvShowId,
