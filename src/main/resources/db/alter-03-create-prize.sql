@@ -26,9 +26,6 @@ CREATE TABLE IF NOT EXISTS `AWARDS_TV_SHOWS`
 );
 
 -- Populate the AWARDS table with data
-American Film Institute Awards
-
--- Populate the AWARDS table with data
 INSERT INTO AWARDS(ID, NAME) VALUES
 	(1, 'American Film Institute Awards'),
 	(2, 'Primetime Emmy Award'),
