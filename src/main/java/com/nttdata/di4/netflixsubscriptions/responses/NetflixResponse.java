@@ -2,7 +2,7 @@ package com.nttdata.di4.netflixsubscriptions.responses;
 
 import java.io.Serializable;
 
-public class NetflixResponse<T extends Serializable> implements Serializable {
+public class NetflixResponse<T> implements Serializable {
 
     private static final long serialVersionUID = 1030644546498072970L;
 
@@ -13,6 +13,12 @@ public class NetflixResponse<T extends Serializable> implements Serializable {
 
     public NetflixResponse() {
         super();
+    }
+
+    public NetflixResponse(String status, String code, String message) {
+        this.status = status;
+        this.code = code;
+        this.message = message;
     }
 
     public NetflixResponse(String status, String code, String message, T data) {
