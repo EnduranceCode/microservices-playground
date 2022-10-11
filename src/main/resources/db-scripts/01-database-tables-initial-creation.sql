@@ -13,6 +13,7 @@ CREATE USER 'netflix-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 
 -- Grant privileges to the new user in the created database
 GRANT ALL PRIVILEGES ON netflix_subscriptions.* TO 'netflix-user'@'localhost';
 
+-- Create the subscription table
 CREATE TABLE IF NOT EXISTS netflix_subscriptions.subscription (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   type VARCHAR(255) NOT NULL,
@@ -23,6 +24,7 @@ CREATE TABLE IF NOT EXISTS netflix_subscriptions.subscription (
   UNIQUE INDEX UNIQUE_ID (id ASC) VISIBLE
 );
 
+-- Create the profile table
 CREATE TABLE IF NOT EXISTS netflix_subscriptions.profile (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
