@@ -1,5 +1,6 @@
 server:   
   port: 8086
+
   
 spring:
   application:
@@ -19,11 +20,25 @@ spring:
   jackson:
     date-format: dd/MM/yyyy HH:mm:ss  
   
+  ##### SECURITY PROPERTIES #####
+  # overrride user/pass instead default for basic login .formLogin() (user=user and pass genarateted on console)
+  # OR, instead can be defined on UserDetailsService Bean
+  security:    
+    user:
+      name: teste      
+      password: 123         
+  # RETIRA INICIALIZAÇÃO DAS DEPENENCIAS DE SEGURAÇANÇA SECURITY AUTOCONFIGURATION
+  # (spring-boot-starter-security, e do spring-boot-starter-actuator)
+  # o mesmo pode ser feito com @SpringBootApplication(exclude={...      
+  #autoconfigure:
+  #  exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  #  exclude[1]: org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+  
  
 eureka:
   client:    
-    enabled: true  # false : in cases when we dont want to connect to a Eureka service
-    registerWithEureka: true  # false: in cases when we dont want to connect to a Eureka service
+    enabled: false  # false : in cases when we dont want to connect to a Eureka service
+    registerWithEureka: false  # false: in cases when we dont want to connect to a Eureka service
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

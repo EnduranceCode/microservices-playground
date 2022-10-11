@@ -13,8 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 // http://localhost:8001/swagger-ui.html
 
 @Configuration
-@EnableSwagger2
+@EnableSwagger2 // apresenta erro com a nova versão do spring 2.7.2 
 public class SwaggerConfig {
+	
 	
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -34,6 +35,5 @@ public class SwaggerConfig {
                 .build();
     }
     
-
     
 }

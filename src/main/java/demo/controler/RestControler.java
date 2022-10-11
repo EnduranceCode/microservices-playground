@@ -2,8 +2,12 @@ package demo.controler;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +20,7 @@ import demo.service.OrderService;
 
 
 @RestController  
-@RequestMapping("/api")  
+@RequestMapping("/api/store")  
 public class RestControler {
 
 	
@@ -25,17 +29,10 @@ public class RestControler {
 
 	
 	/* BASIC REST CRUD OPERATIONS */ 
-  	  
-	@RequestMapping(value="/orders", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public List<OrderEntity> getOrders() {
-		
-		List<OrderEntity> orders = this.orderService.getOrders();	
-
-		return orders;
-	}
 	
 	
+	@RolesAllowed("CUSTOMER")
+	//@Secured("ROLE_CUSTOMER")
 	@RequestMapping(value="/orders/{id}", method = RequestMethod.GET)	
 	@ResponseStatus(HttpStatus.OK)
 	public OrderEntity getOrder(@PathVariable Long id) {
@@ -44,6 +41,18 @@ public class RestControler {
 		
 		return resource;
 	}
+		
+	//@Secured("ROLE_SALESMAN")	
+	@PreAuthorize("hasRole('ROLE_SALESMAN')")
+	@RequestMapping(value="/orders", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public List<OrderEntity> getOrders() {
+		
+		List<OrderEntity> orders = this.orderService.getOrders();	
+
+		return orders;
+	}
+		
 
 	
 	@RequestMapping( value="/orders", method = RequestMethod.POST)
@@ -76,7 +85,7 @@ public class RestControler {
 	
 	/* BASIC REST CRUD OPERATIONS */ 
 	
-
+ 	  
 	
 
 }

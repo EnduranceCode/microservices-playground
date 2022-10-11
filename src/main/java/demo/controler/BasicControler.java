@@ -13,7 +13,13 @@ public class BasicControler {
 
 		return "Hello World - My Fist Spring Boot Web Response !!!";
 	}
-	
+
+	@RequestMapping("/page-sucess") 	
+	public String getSucess() {
+
+		return "Basic Login suceeded !!!!!!!!!!!!!!!!!!!!!!!!";
+	}
+
 	
 	
 }
