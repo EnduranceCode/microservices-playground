@@ -48,7 +48,7 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 				
-		// desabilita segurança por permissão		
+		// COMMNENT IF YOU WANT TO DISABLE SECURITY FOR ALL ENDPOINTS		
 		http		   
     	.authorizeRequests()
 		.antMatchers(
@@ -140,12 +140,14 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
     }
     
 	
+    /*
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() 
 			throws Exception {
 		return super.authenticationManagerBean();
 	}
+	*/
 	
 	
  
