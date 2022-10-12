@@ -5,16 +5,16 @@
 --
 
 -- Create the database on the MySQL Server
-CREATE DATABASE netflix_subscriptions CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE d4i_subscriptions CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create the user's database on the MySQL Server
-CREATE USER 'netflix-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'netflix-secret';
+CREATE USER 'd4i-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'd4i-secret';
 
 -- Grant privileges to the new user in the created database
-GRANT ALL PRIVILEGES ON netflix_subscriptions.* TO 'netflix-user'@'localhost';
+GRANT ALL PRIVILEGES ON d4i_subscriptions.* TO 'd4i-user'@'localhost';
 
 -- Create the subscription table
-CREATE TABLE IF NOT EXISTS netflix_subscriptions.subscription (
+CREATE TABLE IF NOT EXISTS d4i_subscriptions.subscription (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   type VARCHAR(255) NOT NULL,
   price DECIMAL NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS netflix_subscriptions.subscription (
 );
 
 -- Create the profile table
-CREATE TABLE IF NOT EXISTS netflix_subscriptions.profile (
+CREATE TABLE IF NOT EXISTS d4i_subscriptions.profile (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   alias VARCHAR(255) NOT NULL,

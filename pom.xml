@@ -10,12 +10,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.nttdata.di4</groupId>
-	<artifactId>netflix-subscriptions</artifactId>
+	<groupId>com.d4i.bootcamp</groupId>
+	<artifactId>subscriptions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>netflix-subscriptions</name>
-	<description>Netflix Subscriptions Microservices Tutorial</description>
+	<name>Films API</name>
+	<description>Films Microservices Tutorial</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

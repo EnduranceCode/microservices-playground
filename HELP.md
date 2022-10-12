@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.nttdata.di4.neflix-subscriptions' is invalid and this project uses 'com.nttdata.di4.neflixsubscriptions' instead.
-
 # Getting Started
 
 ### Reference Documentation

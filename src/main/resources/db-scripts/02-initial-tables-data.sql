@@ -7,7 +7,7 @@
 -- Populate the subscription table with dummy data
 INSERT
 INTO
-  subscription
+  d4i_subscriptions.subscription
   (id, type, price, start_date, end_date)
 VALUES
   (1, 'BASIC', 7.99, '2022-10-01', '2023-09-30'),
@@ -17,7 +17,7 @@ VALUES
 -- Populate the profile table with dummy data
 INSERT
 INTO
-  profile
+  d4i_subscriptions.profile
   (id, name, alias, subscription_id, avatar)
 VALUES
   (1, 'John Doe', 'Mystery Man', 1, '/user-001.png'),
