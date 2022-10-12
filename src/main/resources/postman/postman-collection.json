@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "d60eed4c-cb48-497d-a0ca-f74df903b7d3",
-		"name": "Netflix Tutorial",
+		"name": "D4i Bootcamp - TV Shows",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9273557"
 	},
@@ -571,7 +571,7 @@
 		},
 		{
 			"key": "APP_NAME",
-			"value": "netflix",
+			"value": "tv-shows-api",
 			"type": "string"
 		},
 		{

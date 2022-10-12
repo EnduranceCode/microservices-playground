@@ -1,5 +1,5 @@
-
 # GIT Ignore File
+docs/
 
 # Created by https://www.gitignore.io/api/java,maven,gradle,eclipse,netbeans,intellij,java-web,code-java,intellij+iml,intellij+all,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=java,maven,gradle,eclipse,netbeans,intellij,java-web,code-java,intellij+iml,intellij+all,visualstudiocode
