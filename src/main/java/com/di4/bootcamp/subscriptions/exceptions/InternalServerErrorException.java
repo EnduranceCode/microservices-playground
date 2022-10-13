@@ -8,11 +8,11 @@ public class InternalServerErrorException extends D4iBootcampException {
 
     private static final long serialVersionUID = -947009503606847734L;
 
-    protected InternalServerErrorException(String message) {
+    public InternalServerErrorException(final String message) {
         super(HttpStatus.INTERNAL_SERVER_ERROR.value(), message);
     }
 
-    protected InternalServerErrorException(String message, final ErrorDto data) {
+    public InternalServerErrorException(final String message, final ErrorDto data) {
         super(HttpStatus.INTERNAL_SERVER_ERROR.value(), message, Collections.singletonList(data));
     }
 }

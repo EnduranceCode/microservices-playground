@@ -8,11 +8,11 @@ public class NotFoundException extends D4iBootcampException {
 
     private static final long serialVersionUID = -7399444852063737770L;
 
-    protected NotFoundException(String message) {
+    public NotFoundException(final String message) {
         super(HttpStatus.NOT_FOUND.value(), message);
     }
 
-    protected NotFoundException(String message, final ErrorDto data) {
+    public NotFoundException(final String message, final ErrorDto data) {
         super(HttpStatus.NOT_FOUND.value(), message, Collections.singletonList(data));
     }
 }
