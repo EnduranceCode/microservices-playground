@@ -10,5 +10,8 @@ public interface SubscriptionController {
     public D4iBootcampResponse<SubscriptionDto> createSubscription(SubscriptionDto subscriptionDto)
             throws D4iBootcampException;
 
+    public D4iBootcampResponse<SubscriptionDto> updateSubscription(Long subscriptionId,
+            SubscriptionDto subscriptionDto) throws D4iBootcampException;
+
     public D4iBootcampResponse<List<SubscriptionDto>> getAllSubscriptions();
 }

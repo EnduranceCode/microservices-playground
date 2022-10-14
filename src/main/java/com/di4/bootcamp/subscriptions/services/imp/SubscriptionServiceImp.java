@@ -2,7 +2,9 @@ package com.di4.bootcamp.subscriptions.services.imp;
 
 import com.di4.bootcamp.subscriptions.dto.SubscriptionDto;
 import com.di4.bootcamp.subscriptions.entities.Subscription;
+import com.di4.bootcamp.subscriptions.exceptions.D4iBootcampException;
 import com.di4.bootcamp.subscriptions.exceptions.InternalServerErrorException;
+import com.di4.bootcamp.subscriptions.exceptions.NotFoundException;
 import com.di4.bootcamp.subscriptions.repositories.SubscriptionRepository;
 import com.di4.bootcamp.subscriptions.services.SubscriptionService;
 import com.di4.bootcamp.subscriptions.utils.constants.ExceptionConstants;
@@ -38,14 +40,46 @@ public class SubscriptionServiceImp implements SubscriptionService {
         subscription.setStartDate(subscriptionDto.getStartDate());
         subscription.setEndDate(subscriptionDto.getEndDate());
 
+        return modelMapper.map(saveSubscription(subscription), SubscriptionDto.class);
+    }
+
+    @Override
+    public SubscriptionDto updateSubscription(Long subscriptionId, SubscriptionDto subscriptionDto)
+            throws D4iBootcampException {
+
+        Subscription subscription;
+        if (subscriptionRepository.existsById(subscriptionId)) {
+            subscription = subscriptionRepository.getReferenceById(subscriptionId);
+        } else {
+            throw new NotFoundException(ExceptionConstants.NON_EXISTENT_SUBSCRIPTION);
+        }
+
+        if (subscriptionDto.getType() != null) {
+            subscription.setType(subscriptionDto.getType());
+        }
+        if (subscriptionDto.getPrice() != null) {
+            subscription.setPrice(subscriptionDto.getPrice());
+        }
+        if (subscriptionDto.getStartDate() != null) {
+            subscription.setStartDate(subscriptionDto.getStartDate());
+        }
+        if (subscriptionDto.getEndDate() != null) {
+            subscription.setEndDate(subscriptionDto.getEndDate());
+        }
+
+        return modelMapper.map(saveSubscription(subscription), SubscriptionDto.class);
+    }
+
+    private Subscription saveSubscription(Subscription subscription)
+            throws InternalServerErrorException {
+
         try {
-            subscriptionRepository.save(subscription);
+            subscription = subscriptionRepository.save(subscription);
         } catch (final Exception exception) {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, exception);
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
         }
-
-        return modelMapper.map(subscription, SubscriptionDto.class);
+        return subscription;
     }
 
     @Override

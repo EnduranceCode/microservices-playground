@@ -9,5 +9,8 @@ public interface SubscriptionService {
     public SubscriptionDto createSubscription(SubscriptionDto subscriptionDto)
             throws D4iBootcampException;
 
+    public SubscriptionDto updateSubscription(Long subscriptionId, SubscriptionDto subscriptionDto)
+            throws D4iBootcampException;
+
     public List<SubscriptionDto> getAllSubscriptions();
 }

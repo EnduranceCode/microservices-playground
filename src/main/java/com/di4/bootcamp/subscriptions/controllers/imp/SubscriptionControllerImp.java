@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,19 @@ public class SubscriptionControllerImp implements SubscriptionController {
 
         return new D4iBootcampResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK, subscriptionService.createSubscription(subscriptionDto));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping(value = RestConstants.RESOURCE_SUBSCRIPTION_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    public D4iBootcampResponse<SubscriptionDto> updateSubscription(
+            @PathVariable Long subscriptionId,
+            @ApiParam(value = RestConstants.PARAMETER_SUBSCRIPTION, required = true) @RequestBody
+            @Valid final SubscriptionDto subscriptionDto) throws D4iBootcampException {
+
+        return new D4iBootcampResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK,
+                subscriptionService.updateSubscription(subscriptionId, subscriptionDto));
     }
 
     @Override
