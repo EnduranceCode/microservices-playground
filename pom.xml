@@ -14,8 +14,8 @@
 	<artifactId>subscriptions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>Films API</name>
-	<description>Films Microservices Tutorial</description>
+	<name>Subscriptions API</name>
+	<description>Subscriptions Microservices Tutorial</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
