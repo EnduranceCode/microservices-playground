@@ -8,6 +8,8 @@ public class RestConstants {
     public static final String RESOURCE_SUBSCRIPTION = "/subscriptions";
     public static final String RESOURCE_PROFILE = "/subscriptions/{subscription-id}/profiles";
 
+    public static final String PARAMETER_SUBSCRIPTION = "subscription";
+
     private RestConstants() {
         throw new IllegalStateException("Utility Class");
     }
