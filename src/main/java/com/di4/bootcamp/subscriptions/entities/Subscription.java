@@ -22,7 +22,7 @@ public class Subscription implements Serializable {
     private static final long serialVersionUID = 8228173425060437261L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

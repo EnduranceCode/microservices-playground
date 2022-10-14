@@ -20,7 +20,7 @@ public class Profile implements Serializable {
     private static final long serialVersionUID = -4974893691154252186L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

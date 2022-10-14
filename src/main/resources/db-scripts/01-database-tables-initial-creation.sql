@@ -8,7 +8,7 @@
 CREATE DATABASE d4i_subscriptions CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create the user's database on the MySQL Server
-CREATE USER 'd4i-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'd4i-secret';
+CREATE USER IF NOT EXISTS 'd4i-user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'd4i-secret';
 
 -- Grant privileges to the new user in the created database
 GRANT ALL PRIVILEGES ON d4i_subscriptions.* TO 'd4i-user'@'localhost';
@@ -17,7 +17,7 @@ GRANT ALL PRIVILEGES ON d4i_subscriptions.* TO 'd4i-user'@'localhost';
 CREATE TABLE IF NOT EXISTS d4i_subscriptions.subscription (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   type VARCHAR(255) NOT NULL,
-  price DECIMAL NOT NULL,
+  price DECIMAL(4,2) NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   CONSTRAINT pk_subscription PRIMARY KEY (id),
