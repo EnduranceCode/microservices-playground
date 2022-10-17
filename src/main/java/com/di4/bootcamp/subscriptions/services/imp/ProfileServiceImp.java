@@ -3,6 +3,7 @@ package com.di4.bootcamp.subscriptions.services.imp;
 import com.di4.bootcamp.subscriptions.dto.ProfileDto;
 import com.di4.bootcamp.subscriptions.entities.Profile;
 import com.di4.bootcamp.subscriptions.entities.Subscription;
+import com.di4.bootcamp.subscriptions.exceptions.BadRequestException;
 import com.di4.bootcamp.subscriptions.exceptions.D4iBootcampException;
 import com.di4.bootcamp.subscriptions.exceptions.InternalServerErrorException;
 import com.di4.bootcamp.subscriptions.exceptions.NotFoundException;
@@ -47,12 +48,8 @@ public class ProfileServiceImp implements ProfileService {
 
         Profile profile;
         if (profileDto.getId() != null) {
-            if (profileRepository.existsById(profileDto.getId())) {
-                profile = profileRepository.getReferenceById(profileDto.getId());
-                profile.setSubscription(subscription);
-            } else {
-                throw new NotFoundException(ExceptionConstants.NON_EXISTENT_PROFILE);
-            }
+            profile = getProfile(profileDto.getId());
+            profile.setSubscription(subscription);
         } else {
             profile = new Profile();
             profile.setName(profileDto.getName());
@@ -61,13 +58,52 @@ public class ProfileServiceImp implements ProfileService {
             profile.setSubscription(subscription);
         }
 
+        return modelMapper.map(saveProfile(profile), ProfileDto.class);
+    }
+
+    @Override
+    public ProfileDto updateProfile(Long subscriptionId, Long profileId, ProfileDto profileDto)
+            throws D4iBootcampException {
+
+        Profile profile = getProfile(profileId);
+
+        if (!profile.getSubscription().getId().equals(subscriptionId)) {
+            throw new BadRequestException(ExceptionConstants.BAD_REQUEST_PROFILE);
+        }
+
+        if (profileDto.getName() != null) {
+            profile.setName(profileDto.getName());
+        }
+        if (profileDto.getAlias() != null) {
+            profile.setAlias(profileDto.getAlias());
+        }
+        if (profileDto.getAvatar() != null) {
+            profile.setAvatar(profileDto.getAvatar());
+        }
+
+        return modelMapper.map(saveProfile(profile), ProfileDto.class);
+    }
+
+    private Profile getProfile(Long profileId) throws NotFoundException {
+
+        Profile profile;
+        if (profileRepository.existsById(profileId)) {
+            profile = profileRepository.getReferenceById(profileId);
+        } else {
+            throw new NotFoundException(ExceptionConstants.NON_EXISTENT_PROFILE);
+        }
+
+        return profile;
+    }
+
+    private Profile saveProfile(Profile profile) throws InternalServerErrorException {
+
         try {
             profile = profileRepository.save(profile);
         } catch (final Exception exception) {
             LOGGER.error(ExceptionConstants.INTERNAL_SERVER_ERROR, exception);
             throw new InternalServerErrorException(ExceptionConstants.INTERNAL_SERVER_ERROR);
         }
-
-        return modelMapper.map(profile, ProfileDto.class);
+        return profile;
     }
 }

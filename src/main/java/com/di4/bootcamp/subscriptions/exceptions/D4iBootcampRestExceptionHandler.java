@@ -1,7 +1,7 @@
 package com.di4.bootcamp.subscriptions.exceptions;
 
-import com.di4.bootcamp.subscriptions.utils.constants.ExceptionConstants;
 import com.di4.bootcamp.subscriptions.responses.D4iBootcampResponse;
+import com.di4.bootcamp.subscriptions.utils.constants.ExceptionConstants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,7 @@ public class D4iBootcampRestExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class})
+    @SuppressWarnings("unused")
     public D4iBootcampResponse unhandledErrors(HttpServletRequest request, Exception exception) {
 
         return new D4iBootcampResponse(ExceptionConstants.ERROR,
@@ -24,8 +25,8 @@ public class D4iBootcampRestExceptionHandler {
     }
 
     @ResponseBody
-    @SuppressWarnings("unused")
     @ExceptionHandler({D4iBootcampException.class})
+    @SuppressWarnings("unused")
     public D4iBootcampResponse handledException(final HttpServletRequest request,
             final HttpServletResponse response, final D4iBootcampException exception) {
 

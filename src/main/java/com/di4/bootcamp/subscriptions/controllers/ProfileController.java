@@ -8,4 +8,7 @@ public interface ProfileController {
 
     D4iBootcampResponse<ProfileDto> addProfile(Long subscriptionId, ProfileDto profileDto)
             throws D4iBootcampException;
+
+    D4iBootcampResponse<ProfileDto> updateProfile(Long subscriptionId, Long profileId,
+            ProfileDto profileDto) throws D4iBootcampException;
 }

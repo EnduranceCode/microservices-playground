@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,18 @@ public class ProfileControllerImp implements ProfileController {
             @Valid final ProfileDto profileDto) throws D4iBootcampException {
 
         return new D4iBootcampResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                CommonConstants.OK, profileService.addProfile(subscriptionId, profileDto));
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping(value = RestConstants.RESOURCE_PROFILE_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+    public D4iBootcampResponse<ProfileDto> updateProfile(@PathVariable Long subscriptionId,
+            @PathVariable Long profileId, @RequestBody @Valid final ProfileDto profileDto)
+            throws D4iBootcampException {
+
+        return new D4iBootcampResponse<>(CommonConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                 CommonConstants.OK,
-                profileService.addProfile(subscriptionId, profileDto));
+                profileService.updateProfile(subscriptionId, profileId, profileDto));
     }
 }
