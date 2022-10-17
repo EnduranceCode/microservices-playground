@@ -14,10 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "film")
+@NamedQuery(name = "Film.findByCategoryId",
+        query = "SELECT f FROM Film f JOIN f.categories c WHERE c = :categoryId")
 public class Film implements Serializable {
 
     private static final long serialVersionUID = -9055733513942096076L;
