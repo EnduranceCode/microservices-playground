@@ -3,6 +3,7 @@ package com.d4i.bootcamp.films.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import java.time.Year;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FilmDto implements Serializable {
@@ -15,6 +16,7 @@ public class FilmDto implements Serializable {
     private String longDescription;
     private Year year;
     private RecommendedAgeDto recommendedAge;
+    private List<CategoryDto> categories;
     private String advertising;
 
     public Long getId() {
@@ -63,6 +65,14 @@ public class FilmDto implements Serializable {
 
     public void setRecommendedAge(RecommendedAgeDto recommendedAge) {
         this.recommendedAge = recommendedAge;
+    }
+
+    public List<CategoryDto> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDto> categories) {
+        this.categories = categories;
     }
 
     public String getAdvertising() {
