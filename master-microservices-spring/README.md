@@ -12,4 +12,5 @@ The folder [`restful-web-services`](./restful-web-services) contains the code de
 
 The folder [`microservicces`](./microservices) contains the code developed for the different components of the microservices section of the course. The components in question are the following:
 
-+ [`Limits Service`](./microservices/limits-service).
++ [`Limits Service`](./microservices/limits-service);
++ [`Spring Cloud Config Server`](./microservices/config-server).
