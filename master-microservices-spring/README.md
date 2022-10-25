@@ -7,3 +7,9 @@ There's a folder for each section/project of the course. Each of those folders c
 ## Restful Web Services
 
 The folder [`restful-web-services`](./restful-web-services) contains the code developed for the first project of the course.
+
+## Microservices
+
+The folder [`microservicces`](./microservices) contains the code developed for the different components of the microservices section of the course. The components in question are the following:
+
++ [`Limits Service`](./microservices/limits-service).
