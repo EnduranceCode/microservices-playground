@@ -14,3 +14,9 @@ The folder [`microservicces`](./microservices) contains the code developed for t
 
 + [`Limits Service`](./microservices/limits-service);
 + [`Spring Cloud Config Server`](./microservices/config-server).
+
+## Currency Service
+
+The folder [`currency-service`](./currency-service)  contains the code developed for the different components of the Currency Project of the course. The components in question are the following:
+
++ [`Currency Exchange Service`](./currency-service/currency-exchange).
