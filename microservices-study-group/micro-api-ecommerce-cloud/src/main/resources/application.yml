@@ -1,7 +1,6 @@
 server:   
   port: 8086
 
-  
 spring:
   application:
     name: micro-api-ecommerce-cloud
@@ -34,11 +33,10 @@ spring:
   #  exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   #  exclude[1]: org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   
- 
 eureka:
   client:    
-    enabled: false  # false : in cases when we dont want to connect to a Eureka service
-    registerWithEureka: false  # false: in cases when we dont want to connect to a Eureka service
+    enabled: true  # false : in cases when we dont want to connect to a Eureka service
+    registerWithEureka: true  # false: in cases when we dont want to connect to a Eureka service
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
@@ -47,16 +45,8 @@ eureka:
     leaseRenewalIntervalInSeconds: 30  # in combination of enableSelfPreservation defined in eureka server
     leaseExpirationDurationInSeconds: 5 # in combination of enableSelfPreservation defined in eureka server
     
-    
-  
-# specific application custom properties  
+# specific application custom properties
 app:
   services:
     payment:
       uri: http://localhost:8050/order-payment/
-      
-    
-    
-
-    
-
