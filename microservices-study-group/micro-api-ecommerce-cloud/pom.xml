@@ -1,132 +1,89 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<modelVersion>4.0.0</modelVersion>
+  <!-- My Aplication information  -->
+  <groupId>demo</groupId>
+  <artifactId>micro-api-ecommerce-cloud</artifactId>
+  <name>micro-api-ecommerce</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
+  <!-- My Application MUST HAVE spring-boot-starter-parent AS PARENT -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+    <!-- <version>2.7.2</version>	-->
+  </parent>
 
-    <!-- My Aplication information  -->
-	<groupId>demo</groupId>
-	<artifactId>micro-api-ecommerce-cloud</artifactId>
-	<name>micro-api-ecommerce</name>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	
-	
-	<!-- My Application MUST HAVE spring-boot-starter-parent AS PARENT -->
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>
-		<!-- <version>2.7.2</version>	-->			
-	</parent>
+  <dependencies>
+    <!-- required libraries for Spring Boot WEB -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
+    <!-- libraries necessárias para usar Spring DATA JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
 
-	<dependencies>
+    <!-- libraries necessárias H2 Database -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
 
-		<!-- required libraries for Spring Boot WEB -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+    <!-- libraries necessárias para o Swagger -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
 
-		<!-- libraries necessárias para usar Spring DATA JPA -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
 
+    <!-- libraries necessárias para Spring Security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
 
-		<!-- libraries necessárias H2 Database -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-		
-		
-		<!-- libraries necessárias para o Swagger -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-				
+    <!-- required when use AuthorizationServerConfigurerAdapter
+    for java bean springSecurityFilterChain WebSecurityConfiguration -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+    </dependency>
+  </dependencies>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		
-		
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		
-		
-		<!-- libraries necessárias para Spring Security -->
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-				
-		<!--
-		<dependency>
-			<groupId>org.springframework.security.oauth.boot</groupId>
-			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
-			<version>2.0.1.RELEASE</version>
-		</dependency>
-		-->
-		
-				
-		<!-- required when use AuthorizationServerConfigurerAdapter
-		for java bean springSecurityFilterChain WebSecurityConfiguration -->      	
-    	<dependency>
-    		<groupId>org.glassfish.jaxb</groupId>
-    		<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-		
-		<!-- libraries necessárias para Spring Security -->
-				
-		
-	</dependencies>
-	
-	
-	    <dependencyManagement>
-        <dependencies>
-        	
-        	<!--
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-          -->
-            
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <!--  <version>2021.0.3</version>--> <!--  PARA USO COM A VERSÃO 2.7.2 DO SPRING BOOT--> 
-                <version>Greenwich.SR1</version>                                
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            
-            
-
-            
-        </dependencies>
-        
-    </dependencyManagement>
-	
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <!--  <version>2021.0.3</version>--> <!--  PARA USO COM A VERSÃO 2.7.2 DO SPRING BOOT-->
+        <version>Greenwich.SR1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
