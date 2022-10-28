@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost:7001/mem:mydb
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate  # OPTIONS: none, validate, update, create-drop
+  h2:
+    console.enabled: false  # Enables H2 browser page on: /h2-console
+
+eureka:
+  client:
+    enabled: true  # false : in cases when we don't want to connect to a Eureka service
+    registerWithEureka: true  # false: in cases when we don't want to connect to a Eureka service
