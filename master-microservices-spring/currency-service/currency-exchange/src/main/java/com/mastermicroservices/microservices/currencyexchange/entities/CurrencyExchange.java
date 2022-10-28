@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity(name = "CurrencyExchange")
 @Table(name = "currency_exchange")
@@ -19,10 +20,10 @@ public class CurrencyExchange {
     @Column(name = "currency_to")
     private String currencyTo;
 
-    @Column(name = "conversion_multiple")
-    private BigDecimal conversionMultiple;
+    @Column(name = "exchange_rate")
+    private BigDecimal exchangeRate;
 
-    @Column(name = "environment")
+    @Transient
     private String environment;
 
     public CurrencyExchange() {
@@ -30,12 +31,12 @@ public class CurrencyExchange {
     }
 
     public CurrencyExchange(Long id, String currencyFrom, String currencyTo,
-            BigDecimal conversionMultiple, String environment) {
+            BigDecimal exchangeRate, String environment) {
         super();
         this.id = id;
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
-        this.conversionMultiple = conversionMultiple;
+        this.exchangeRate = exchangeRate;
         this.environment = environment;
     }
 
@@ -63,12 +64,12 @@ public class CurrencyExchange {
         this.currencyTo = currencyTo;
     }
 
-    public BigDecimal getConversionMultiple() {
-        return conversionMultiple;
+    public BigDecimal getExchangeRate() {
+        return exchangeRate;
     }
 
-    public void setConversionMultiple(BigDecimal conversionMultiple) {
-        this.conversionMultiple = conversionMultiple;
+    public void setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
     }
 
     public String getEnvironment() {
