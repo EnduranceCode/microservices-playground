@@ -8,18 +8,20 @@ public class CurrencyExchange {
     private String fromCurrency;
     private String toCurrency;
     private BigDecimal conversionMultiple;
+    private String environment;
 
     public CurrencyExchange() {
         super();
     }
 
     public CurrencyExchange(Long id, String fromCurrency, String toCurrency,
-            BigDecimal conversionMultiple) {
+            BigDecimal conversionMultiple, String environment) {
         super();
         this.id = id;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.conversionMultiple = conversionMultiple;
+        this.environment = environment;
     }
 
     public Long getId() {
@@ -52,5 +54,13 @@ public class CurrencyExchange {
 
     public void setConversionMultiple(BigDecimal conversionMultiple) {
         this.conversionMultiple = conversionMultiple;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
     }
 }
