@@ -1,9 +1,10 @@
 package demo.entities.ecommerce;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity(name = "Order")  
@@ -27,22 +25,19 @@ public class OrderEntity  {
 	@Column(name="id", nullable=false)
 	private Long id;
 
-	
-	@Column(name="code", nullable=false, unique=true)  
+	@Column(name="code", nullable=false, unique=true)
 	private String code;
-
 
 	@Column(name="date", nullable=false)
 	// @Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private  LocalDate date;
 
-	@Column(name="total_value", nullable=false)  
-	@JsonProperty("total_value")
-	private Double totalValue;
+	@Column(name = "total_amount", nullable = false)
+	@JsonProperty("total_amount")
+	private BigDecimal totalAmount;
 	
-	
-	//@Transient    	      
+	//@Transient
 	@Column(name="status", nullable=true)  
 	private String status;
 
@@ -50,9 +45,7 @@ public class OrderEntity  {
 	@JoinColumn(name = "customer_id")
 	private CustomerEntity customer;
 	
-	
 	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	
 	
 	// OBS: TENTATIVAs DE COLUNA LAZY: NO H2 não teve efeito, mesmo com lazy a lista sempre é carregada (TODO: teste com mysql)
 	@OneToMany
@@ -73,8 +66,6 @@ public class OrderEntity  {
 	@JsonIgnore(true)
 	private Long hasItemNotDelivered;
 
-	
-	
 	@PostLoad
 	private void postLoad() {
 
@@ -82,15 +73,9 @@ public class OrderEntity  {
 	}
 	*/
 	
-
-
-
-
-
 	public String getStatus() {
 		return status;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -116,12 +101,12 @@ public class OrderEntity  {
 		this.date = date;
 	}
 
-	public Double getTotalValue() {
-		return totalValue;
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setTotalValue(Double totalValue) {
-		this.totalValue = totalValue;
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 	public CustomerEntity getCustomer() {
@@ -131,8 +116,6 @@ public class OrderEntity  {
 	public void setCustomer(CustomerEntity customer) {
 		this.customer = customer;
 	}
-
-
 
 	public void setLogisticaSituacao(String logisticaSituacao) {
 		this.status = logisticaSituacao;
@@ -148,19 +131,8 @@ public class OrderEntity  {
 	}
 	*/
 
-
-
-
-
-	
-	
-	
-
 	//@OneToMany(mappedBy = "pedido", targetEntity = PedidoProdutosEntidade.class)
 	//private List<PedidoProdutosEntidade> itens;
-
-
-
 
 	/*
 	public List<PedidoProdutosEntidade> getItens() {
@@ -171,7 +143,4 @@ public class OrderEntity  {
 		this.itens = itens;
 	}
 	 */
-
-
-
 }

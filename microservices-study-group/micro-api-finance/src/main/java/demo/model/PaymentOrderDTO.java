@@ -1,13 +1,15 @@
 package demo.model;
 
 
-public class PaymentOrderDTO  {   
+import java.math.BigDecimal;
+
+public class PaymentOrderDTO  {
 
 	private Long orderId;
 	
 	private String fiscalNumber;
 
-	private Double value;
+	private BigDecimal totalValue;
 	
 	private Boolean aproved = false;
 
@@ -27,12 +29,12 @@ public class PaymentOrderDTO  {
 		this.fiscalNumber = fiscalNumber;
 	}
 
-	public Double getValue() {
-		return value;
+	public BigDecimal getTotalValue() {
+		return totalValue;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public void setTotalValue(BigDecimal totalValue) {
+		this.totalValue = totalValue;
 	}
 
 	public Boolean getAproved() {
@@ -42,8 +44,4 @@ public class PaymentOrderDTO  {
 	public void setAproved(Boolean aproved) {
 		this.aproved = aproved;
 	}
-
-
-
-
 }

@@ -1,5 +1,6 @@
 package demo.entities.finance;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,14 +27,14 @@ public class PaymentEntity  {
 	
 	@Column(name = "fiscal_number")
 	private String fiscalNumber;
-	
-	@Column(name="order_value", nullable=false)
-	@JsonProperty("value")
-	private Double orderValue;
 
-	@Column(name="autorization_dt", nullable=false)
+	@Column(name="total_value", nullable=false)
+	@JsonProperty("total_value")
+	private BigDecimal totalValue;
+
+	@Column(name="authorization_dt", nullable=false)
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
-	private  LocalDateTime autorizationDateTime;
+	private  LocalDateTime authorizationDateTime;
 
 	public Long getId() {
 		return id;
@@ -59,19 +60,19 @@ public class PaymentEntity  {
 		this.fiscalNumber = fiscalNumber;
 	}
 
-	public Double getOrderValue() {
-		return orderValue;
+	public BigDecimal getTotalValue() {
+		return totalValue;
 	}
 
-	public void setOrderValue(Double orderValue) {
-		this.orderValue = orderValue;
+	public void setTotalValue(BigDecimal totalValue) {
+		this.totalValue = totalValue;
 	}
 
-	public LocalDateTime getAutorizationDateTime() {
-		return autorizationDateTime;
+	public LocalDateTime getAuthorizationDateTime() {
+		return authorizationDateTime;
 	}
 
-	public void setAutorizationDateTime(LocalDateTime autorizationDateTime) {
-		this.autorizationDateTime = autorizationDateTime;
+	public void setAuthorizationDateTime(LocalDateTime authorizationDateTime) {
+		this.authorizationDateTime = authorizationDateTime;
 	}
 }

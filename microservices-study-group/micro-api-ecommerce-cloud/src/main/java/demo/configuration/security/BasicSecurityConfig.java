@@ -2,8 +2,6 @@ package demo.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,8 +13,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-
-
 /****************** README *******************
 
 IN ORDER TO ENABLE AUTHENTICATION AND AUTHORIZATION, 
@@ -24,22 +20,19 @@ UNCOMMENT BELLOW COMMENTS NOTE1 AND NOTE2
 
 ************* END README ********************/
 
-
-/* 
+/*
 prePostEnabled: enables support for @PreAuthorize and @PostAuthorize annotations
 securedEnabled enables support for @Secured annotation. 
 sr250Enabled enables support for the @RolesAllowed annotation
-*/
-/** 
+*/ 
+
 //NOTE1: ENABLE AUTHORIZATION SECURITY
-@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true, jsr250Enabled = true)
-**/
+//@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true, jsr250Enabled = true)
 
 @Configuration
 @EnableWebSecurity
 /*  WebSecurityConfigurerAdapter ESTÁ DEPRECTED POR VERSÕES ACIMA da Spring boot version 2.1.6.RELEASE */
 public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
-
 
 	/* FONTES: https://www.marcobehler.com/guides/spring-security
 	           https://www.javadevjournal.com/spring-boot/spring-boot-security-auto-configuration/
@@ -48,15 +41,15 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 				
-		// COMMNENT IF YOU WANT TO DISABLE SECURITY FOR ALL ENDPOINTS		
-		http		   
+		// COMMNENT IF YOU WANT TO DISABLE SECURITY FOR ALL ENDPOINTS
+		
+		http
     	.authorizeRequests()
 		.antMatchers(
 				"/**")				
 		.permitAll();
-		
-		
-		/**
+
+/*
 		// NOTE2: ENABLE AUTENTICATION SECURITY
 		
 		http	
@@ -64,6 +57,8 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
   		     // <input name="_csrf" type="hidden" value="078648ad-1527-4a7e-8055-1ffa5c4e26b2" /> 
   		     // (util only for websites)  		      
 		    .csrf().disable()
+		    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+		    .and()
 		    
         	.authorizeRequests()			
         	.antMatchers("/swagger/**").permitAll()				
@@ -82,11 +77,8 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
         		.and()
         			.logout()
         			.permitAll();
-        				
-		 **/    
-		 		  
+*/
 	}
-	
 	
 	 @Override
      public void configure(WebSecurity web) throws Exception {
@@ -103,16 +95,13 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
 			 "/configuration/security",
 			 "/swagger-ui.html",
 			 "/webjars/**");
-
      }
    
-	
     @Bean
     @Override
     /*  UserDetailsService is ignored if we declare: configure(AuthenticationManagerBuilder auth) */
     public UserDetailsService userDetailsService() {
 
-    	
         UserDetails user1 =
                 User.withUsername("john")
                         .password(getPasswordEncoder().encode("0000"))
@@ -139,18 +128,15 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
     
-	
-    /*
+/*
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() 
 			throws Exception {
 		return super.authenticationManagerBean();
 	}
-	*/
+*/
 	
-	
- 
 /*
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) 
@@ -192,13 +178,4 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter {
 		.roles("MANAGER");	
 	}
 */
-
-
-
-	
-
-
-	
-
-
 }

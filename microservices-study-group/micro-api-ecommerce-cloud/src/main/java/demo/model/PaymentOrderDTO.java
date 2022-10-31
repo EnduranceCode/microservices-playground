@@ -1,15 +1,17 @@
 package demo.model;
 
 
-public class PaymentOrderDTO  {   
+import java.math.BigDecimal;
+
+public class PaymentOrderDTO  {
 
 	private Long orderId;
 	
 	private String fiscalNumber;
 
-	private Double value;
+	private BigDecimal value;
 	
-	private Boolean aproved = false;
+	private Boolean approved = false;
 
 	public Long getOrderId() {
 		return orderId;
@@ -27,23 +29,19 @@ public class PaymentOrderDTO  {
 		this.fiscalNumber = fiscalNumber;
 	}
 
-	public Double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(Double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
-	public Boolean getAproved() {
-		return aproved;
+	public Boolean getApproved() {
+		return approved;
 	}
 
-	public void setAproved(Boolean aproved) {
-		this.aproved = aproved;
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
 	}
-
-
-
-
 }

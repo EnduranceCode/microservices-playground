@@ -1,9 +1,10 @@
 package demo.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,41 +15,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-@Entity
+@Entity(name = "Order")
 @Table(name = "TB_ECOM_ORDER")
 public class OrderEntity  {   
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private Long id;
 
-
-	@Column(name="code", nullable=false, unique=true)  
+	@Column(name = "code", nullable = false, unique = true)
 	private String code;
 
+	@Column(name = "date", nullable = false)
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate date;
 
-	@Column(name="date", nullable=false)
-	@JsonFormat(pattern="dd/MM/yyyy")
-	private  LocalDate date;
+	@Column(name = "total_amount", nullable = false)
+	@JsonProperty("total_amount")
+	private BigDecimal totalAmount;
 
-	@Column(name="total_value", nullable=false)
-	@JsonProperty("total_value")
-	private Double totalValue;
-	
-	@Column(name="status", nullable=true)  
+	@Column(name = "status", nullable = true)
 	private String status;
-	
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id")
 	private CustomerEntity customer;
-
-
 
 	public Long getId() {
 		return id;
@@ -74,12 +66,12 @@ public class OrderEntity  {
 		this.date = date;
 	}
 
-	public Double getTotalValue() {
-		return totalValue;
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setTotalValue(Double totalValue) {
-		this.totalValue = totalValue;
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 	public CustomerEntity getCustomer() {
@@ -97,7 +89,4 @@ public class OrderEntity  {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
-
 }

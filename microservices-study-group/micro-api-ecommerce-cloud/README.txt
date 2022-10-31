@@ -11,7 +11,10 @@ INSTRUCTIONS:
 4- PROXY: Execute micro-cloud-proxy (OPTIONAL)
    - http://localhost:8765/actuator/health
 
-5- Execute micro-api-ecommerce-cloud. (change port on YML file before launch each instance you want to run, or use --server.port=8087 program arguments)
+5- Execute micro-api-ecommerce-cloud.
+    (if it does not connect to Eureka, then check in application.yml properties eureka.client enabled and registerWithEureka are true)
+    (if security authorization is enabled, then comment  @EnableGlobalMethodSecurity in BasicSecurityConfig class
+    (change port on YML file before launch each instance you want to run, or use --server.port=8087 program arguments)
 
    ECOMMERCE INSTANCES (CALL DIRECTLY)
    - http://localhost:8086/swagger-ui.html to see Swagger with RestControler in action
