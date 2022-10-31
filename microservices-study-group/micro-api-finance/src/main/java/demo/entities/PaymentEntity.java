@@ -1,6 +1,5 @@
 package demo.entities;
 
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,28 +14,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "TB_FIN_PAYMENT")
-public class PaymentEntity  {   
+public class PaymentEntity  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", nullable=false)
 	private Long id;
-	
+
 	@Column(name = "orderId")
 	private Long orderId;
-	
+
 	@Column(name = "fiscal_number")
 	private String fiscalNumber;
-	
-	
-	@Column(name="value", nullable=false)
+
+	@Column(name="order_value", nullable=false)
 	@JsonProperty("value")
-	private Double value;
+	private Double orderValue;
 
 	@Column(name="autorization_dt", nullable=false)
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	private  LocalDateTime autorizationDateTime;
-
 
 	public Long getId() {
 		return id;
@@ -45,8 +42,6 @@ public class PaymentEntity  {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public Long getOrderId() {
 		return orderId;
@@ -64,12 +59,12 @@ public class PaymentEntity  {
 		this.fiscalNumber = fiscalNumber;
 	}
 
-	public Double getValue() {
-		return value;
+	public Double getOrderValue() {
+		return orderValue;
 	}
 
-	public void setValue(Double value) {
-		this.value = value;
+	public void setOrderValue(Double orderValue) {
+		this.orderValue = orderValue;
 	}
 
 	public LocalDateTime getAutorizationDateTime() {
@@ -79,9 +74,4 @@ public class PaymentEntity  {
 	public void setAutorizationDateTime(LocalDateTime autorizationDateTime) {
 		this.autorizationDateTime = autorizationDateTime;
 	}
-
-
-
-
-
 }

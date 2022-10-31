@@ -60,7 +60,7 @@ public class PaymentService {
 		PaymentEntity paymentEntity = new PaymentEntity();		
 		paymentEntity.setOrderId(paymentOrderDTO.getOrderId());
 		paymentEntity.setFiscalNumber(paymentOrderDTO.getFiscalNumber());	
-		paymentEntity.setValue(paymentOrderDTO.getValue());
+		paymentEntity.setOrderValue(paymentOrderDTO.getValue());
 		paymentEntity.setAutorizationDateTime(LocalDateTime.now());
 		paymentEntity = this.repository.save(paymentEntity);
 						
